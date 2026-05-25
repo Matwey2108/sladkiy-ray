@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const gr = (c1: string, c2: string) => `linear-gradient(135deg, ${c1}, ${c2})`;
+const IMG = '/sladkiy-ray/images/';
 
 interface Product {
   id: number;
@@ -30,36 +30,36 @@ interface Order {
 }
 
 const products: Product[] = [
-  { id: 1,  name: "Медовик нежный",          desc: "Классический многослойный торт",   weight: "900 г",  price: 1350, img: gr('#fff4ea','#f0c070') },
-  { id: 2,  name: "Чизкейк Нью-Йорк",        desc: "Кремовая текстура",               weight: "1000 г", price: 1600, img: gr('#fffde7','#ffe082') },
-  { id: 3,  name: "Капкейк Солёная карамель", desc: "Нежный бисквит",                  weight: "110 г",  price: 220,  img: gr('#ffe4ef','#f5a7c0') },
-  { id: 4,  name: "Печенье с шоколадом",      desc: "Хрустящее, с кусочками шоколада", weight: "250 г",  price: 390,  img: gr('#fff8e1','#e8a855') },
-  { id: 5,  name: "Макарунс ассорти",         desc: "6 шт, французские",               weight: "150 г",  price: 540,  img: gr('#f3e5f5','#ce93d8') },
-  { id: 6,  name: "Эклер с заварным кремом",  desc: "4 шт, воздушное тесто",           weight: "200 г",  price: 450,  img: gr('#fbe9e7','#d4a882') },
-  { id: 7,  name: "Торт Ягодный рай",         desc: "Свежие фрукты и ягоды",           weight: "1200 г", price: 1850, img: gr('#fce4ec','#f48fb1') },
-  { id: 8,  name: "Капкейки Черничные",       desc: "С черничным кремом",              weight: "110 г",  price: 240,  img: gr('#ede7f6','#9575cd') },
-  { id: 9,  name: "Шоколадный торт",          desc: "Бельгийский шоколад",             weight: "950 г",  price: 1750, img: gr('#efebe9','#8d6e63') },
-  { id: 10, name: "Мини-пирожные",            desc: "Ассорти 8 шт",                    weight: "400 г",  price: 890,  img: gr('#fff9f2','#f7c9a0') },
-  { id: 11, name: "Наполеон",                 desc: "Традиционный рецепт",             weight: "850 г",  price: 1450, img: gr('#fffde7','#f9d276') },
-  { id: 12, name: "Тирамису",                 desc: "Итальянская классика",            weight: "700 г",  price: 1550, img: gr('#efebe9','#a1887f') },
-  { id: 13, name: "Торт Красный бархат",      desc: "С кремчизом",                     weight: "1100 г", price: 1950, img: gr('#fce4ec','#e57373') },
-  { id: 14, name: "Чизкейк с ягодами",        desc: "Клубника и малина",               weight: "950 г",  price: 1700, img: gr('#fce4ec','#ef9a9a') },
-  { id: 15, name: "Фруктовый торт",           desc: "Свежие фрукты",                   weight: "1300 г", price: 2100, img: gr('#f1f8e9','#aed581') },
-  { id: 16, name: "Шоколадный капкейк",       desc: "С темным шоколадом",              weight: "120 г",  price: 250,  img: gr('#fbe9e7','#ce8965') },
-  { id: 17, name: "Капкейки Праздничные",     desc: "С декором",                       weight: "110 г",  price: 280,  img: gr('#fff8e1','#ffe57f') },
-  { id: 18, name: "Макарон Ассорти XL",       desc: "12 шт разных вкусов",             weight: "300 г",  price: 980,  img: gr('#f3e5f5','#b39ddb') },
-  { id: 19, name: "Брауни шоколадные",        desc: "Влажные с орехами",               weight: "300 г",  price: 650,  img: gr('#efebe9','#9e8070') },
-  { id: 20, name: "Брауни премиум",           desc: "С белым шоколадом",               weight: "350 г",  price: 720,  img: gr('#fafafa','#e0d0c8') },
-  { id: 21, name: "Пончики глазированные",    desc: "6 шт с разной глазурью",          weight: "350 г",  price: 480,  img: gr('#fce4ec','#f06292') },
-  { id: 22, name: "Пончик розовый",           desc: "С клубничной глазурью",           weight: "80 г",   price: 120,  img: gr('#ffe4ef','#ec407a') },
-  { id: 23, name: "Пончики с посыпкой",       desc: "Яркие и вкусные",                 weight: "320 г",  price: 450,  img: gr('#e8f5e9','#81c784') },
-  { id: 24, name: "Пирог черничный",          desc: "Классический домашний",           weight: "800 г",  price: 1350, img: gr('#ede7f6','#7986cb') },
-  { id: 25, name: "Тарт ягодный",             desc: "С заварным кремом",               weight: "600 г",  price: 1250, img: gr('#fce4ec','#ef9a9a') },
-  { id: 26, name: "Тарт фруктовый",           desc: "Микс ягод и фруктов",             weight: "650 г",  price: 1400, img: gr('#f9fbe7','#c5e1a5') },
-  { id: 27, name: "Крем-брюле",               desc: "Французский десерт",              weight: "180 г",  price: 380,  img: gr('#fff8e1','#ffcc80') },
-  { id: 28, name: "Крем-брюле премиум",       desc: "С ванилью Мадагаскара",           weight: "200 г",  price: 450,  img: gr('#fff3e0','#ffb74d') },
-  { id: 29, name: "Маффины шоколадные",       desc: "6 шт с шоколадной крошкой",       weight: "320 г",  price: 520,  img: gr('#efebe9','#bcaaa4') },
-  { id: 30, name: "Маффины черничные",        desc: "Со свежей черникой",              weight: "300 г",  price: 550,  img: gr('#ede7f6','#b39ddb') },
+  { id: 1,  name: "Медовик нежный",          desc: "Классический многослойный торт",   weight: "900 г",  price: 1350, img: IMG + 'medovik.jpg' },
+  { id: 2,  name: "Чизкейк Нью-Йорк",        desc: "Кремовая текстура",               weight: "1000 г", price: 1600, img: IMG + 'cheesecake.jpg' },
+  { id: 3,  name: "Капкейк Солёная карамель", desc: "Нежный бисквит",                  weight: "110 г",  price: 220,  img: IMG + 'cupcake.jpg' },
+  { id: 4,  name: "Печенье с шоколадом",      desc: "Хрустящее, с кусочками шоколада", weight: "250 г",  price: 390,  img: IMG + 'cookie.jpg' },
+  { id: 5,  name: "Макарунс ассорти",         desc: "6 шт, французские",               weight: "150 г",  price: 540,  img: IMG + 'macaron.jpg' },
+  { id: 6,  name: "Эклер с заварным кремом",  desc: "4 шт, воздушное тесто",           weight: "200 г",  price: 450,  img: IMG + 'eclair.jpg' },
+  { id: 7,  name: "Торт Ягодный рай",         desc: "Свежие фрукты и ягоды",           weight: "1200 г", price: 1850, img: IMG + 'cake.jpg' },
+  { id: 8,  name: "Капкейки Черничные",       desc: "С черничным кремом",              weight: "110 г",  price: 240,  img: IMG + 'cupcake.jpg' },
+  { id: 9,  name: "Шоколадный торт",          desc: "Бельгийский шоколад",             weight: "950 г",  price: 1750, img: IMG + 'chocolate_cake.jpg' },
+  { id: 10, name: "Мини-пирожные",            desc: "Ассорти 8 шт",                    weight: "400 г",  price: 890,  img: IMG + 'tart.jpg' },
+  { id: 11, name: "Наполеон",                 desc: "Традиционный рецепт",             weight: "850 г",  price: 1450, img: IMG + 'napoleon.jpg' },
+  { id: 12, name: "Тирамису",                 desc: "Итальянская классика",            weight: "700 г",  price: 1550, img: IMG + 'tiramisu.jpg' },
+  { id: 13, name: "Торт Красный бархат",      desc: "С кремчизом",                     weight: "1100 г", price: 1950, img: IMG + 'red_velvet.jpg' },
+  { id: 14, name: "Чизкейк с ягодами",        desc: "Клубника и малина",               weight: "950 г",  price: 1700, img: IMG + 'cheesecake.jpg' },
+  { id: 15, name: "Фруктовый торт",           desc: "Свежие фрукты",                   weight: "1300 г", price: 2100, img: IMG + 'tart.jpg' },
+  { id: 16, name: "Шоколадный капкейк",       desc: "С темным шоколадом",              weight: "120 г",  price: 250,  img: IMG + 'cupcake.jpg' },
+  { id: 17, name: "Капкейки Праздничные",     desc: "С декором",                       weight: "110 г",  price: 280,  img: IMG + 'cupcake.jpg' },
+  { id: 18, name: "Макарон Ассорти XL",       desc: "12 шт разных вкусов",             weight: "300 г",  price: 980,  img: IMG + 'macaron.jpg' },
+  { id: 19, name: "Брауни шоколадные",        desc: "Влажные с орехами",               weight: "300 г",  price: 650,  img: IMG + 'brownie.jpg' },
+  { id: 20, name: "Брауни премиум",           desc: "С белым шоколадом",               weight: "350 г",  price: 720,  img: IMG + 'brownie.jpg' },
+  { id: 21, name: "Пончики глазированные",    desc: "6 шт с разной глазурью",          weight: "350 г",  price: 480,  img: IMG + 'donut.jpg' },
+  { id: 22, name: "Пончик розовый",           desc: "С клубничной глазурью",           weight: "80 г",   price: 120,  img: IMG + 'donut.jpg' },
+  { id: 23, name: "Пончики с посыпкой",       desc: "Яркие и вкусные",                 weight: "320 г",  price: 450,  img: IMG + 'donut.jpg' },
+  { id: 24, name: "Пирог черничный",          desc: "Классический домашний",           weight: "800 г",  price: 1350, img: IMG + 'pie.jpg' },
+  { id: 25, name: "Тарт ягодный",             desc: "С заварным кремом",               weight: "600 г",  price: 1250, img: IMG + 'tart.jpg' },
+  { id: 26, name: "Тарт фруктовый",           desc: "Микс ягод и фруктов",             weight: "650 г",  price: 1400, img: IMG + 'tart.jpg' },
+  { id: 27, name: "Крем-брюле",               desc: "Французский десерт",              weight: "180 г",  price: 380,  img: IMG + 'creme_brulee.jpg' },
+  { id: 28, name: "Крем-брюле премиум",       desc: "С ванилью Мадагаскара",           weight: "200 г",  price: 450,  img: IMG + 'creme_brulee.jpg' },
+  { id: 29, name: "Маффины шоколадные",       desc: "6 шт с шоколадной крошкой",       weight: "320 г",  price: 520,  img: IMG + 'muffin.jpg' },
+  { id: 30, name: "Маффины черничные",        desc: "Со свежей черникой",              weight: "300 г",  price: 550,  img: IMG + 'muffin.jpg' },
 ];
 
 export default function App() {
@@ -187,8 +187,7 @@ export default function App() {
                 { id: 'contacts', label: 'Контакты' },
               ].map(item => (
                 <li key={item.id}>
-                  <button
-                    onClick={() => setCurrentSection(item.id)}
+                  <button onClick={() => setCurrentSection(item.id)}
                     className={`font-semibold text-[#4b2e24] transition-all pb-1.5 ${currentSection === item.id ? 'text-[#d48c54] border-b-2 border-[#d48c54]' : 'hover:text-[#d48c54]'}`}
                   >{item.label}</button>
                 </li>
@@ -234,14 +233,16 @@ export default function App() {
                   Смотреть каталог
                 </button>
               </div>
-              <div className="w-[300px] h-[300px] rounded-[32px] shadow-lg flex-shrink-0" style={{background: gr('#fff4ea','#d48c54')}} />
+              <div>
+                <img src={IMG + 'medovik.jpg'} className="rounded-[32px] max-w-full w-[300px] h-[300px] object-cover shadow-lg" alt="торт" />
+              </div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
-              <div className="rounded-2xl w-full h-48 shadow-md hover:scale-105 transition-transform" style={{background: gr('#fff4ea','#f5c98e')}} />
-              <div className="rounded-2xl w-full h-48 shadow-md hover:scale-105 transition-transform" style={{background: gr('#ffe4ef','#f5a7c0')}} />
-              <div className="rounded-2xl w-full h-48 shadow-md hover:scale-105 transition-transform" style={{background: gr('#f3e5f5','#ce93d8')}} />
-              <div className="rounded-2xl w-full h-48 shadow-md hover:scale-105 transition-transform" style={{background: gr('#fbe9e7','#d4a882')}} />
+              <img src={IMG + 'cake.jpg'}          className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="торт" />
+              <img src={IMG + 'cupcake.jpg'}       className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="капкейки" />
+              <img src={IMG + 'macaron.jpg'}       className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="макаруны" />
+              <img src={IMG + 'cheesecake.jpg'}    className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="чизкейк" />
             </div>
 
             <div className="text-center my-5">
@@ -282,7 +283,7 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 my-10">
               {products.map(product => (
                 <div key={product.id} className="bg-white rounded-[2rem] p-5 transition-all hover:-translate-y-1.5 hover:shadow-xl border border-[#f5e4d8]">
-                  <div className="w-full h-52 rounded-[1.5rem] mb-3" style={{background: product.img}} />
+                  <img src={product.img} alt={product.name} className="w-full h-52 object-cover rounded-[1.5rem] mb-3" />
                   <div className="text-xl font-semibold my-2.5">{product.name}</div>
                   <div className="text-[#6b4c3b] text-sm">{product.desc}</div>
                   <div className="text-xs text-[#8a6a58] mt-1">{product.weight}</div>
@@ -309,25 +310,24 @@ export default function App() {
                   </button>
                 </div>
                 <div className="flex-1 text-center">
-                  <div className="rounded-[28px] w-full max-w-[400px] h-64 mx-auto shadow-md" style={{background: gr('#fff9f2','#e8b888')}} />
+                  <img src={IMG + 'napoleon.jpg'} className="rounded-[28px] w-full max-w-[400px] h-64 object-cover mx-auto shadow-md" alt="кондитерская" />
                 </div>
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                <div className="relative rounded-2xl overflow-hidden shadow-lg">
-                  <div className="w-full h-64" style={{background: gr('#fff4ea','#d48c54')}} />
+                <div className="relative rounded-2xl overflow-hidden shadow-lg group">
+                  <img src={IMG + 'brownie.jpg'} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="процесс" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h3 className="text-white font-bold text-lg">Процесс с любовью</h3>
                   </div>
                 </div>
-                <div className="relative rounded-2xl overflow-hidden shadow-lg">
-                  <div className="w-full h-64" style={{background: gr('#fbe9e7','#d4a882')}} />
+                <div className="relative rounded-2xl overflow-hidden shadow-lg group">
+                  <img src={IMG + 'eclair.jpg'} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="выпечка" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h3 className="text-white font-bold text-lg">Свежая выпечка</h3>
                   </div>
                 </div>
-                <div className="relative rounded-2xl overflow-hidden shadow-lg">
-                  <div className="w-full h-64" style={{background: gr('#fff4ea','#f5c98e')}} />
+                <div className="relative rounded-2xl overflow-hidden shadow-lg group">
+                  <img src={IMG + 'macaron.jpg'} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="декор" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h3 className="text-white font-bold text-lg">Ручное декорирование</h3>
                   </div>
