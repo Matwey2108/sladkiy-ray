@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 
 interface Product {
   id: number;
@@ -28,36 +28,36 @@ interface Order {
 }
 
 const products: Product[] = [
-  { id: 1, name: "Медовик нежный", desc: "Классический многослойный торт", weight: "900 г", price: 1350, img: "https://loremflickr.com/300/208/cake?lock=1" },
-  { id: 2, name: "Чизкейк Нью-Йорк", desc: "Кремовая текстура", weight: "1000 г", price: 1600, img: "https://loremflickr.com/300/208/cheesecake?lock=2" },
-  { id: 3, name: "Капкейк Солёная карамель", desc: "Нежный бисквит", weight: "110 г", price: 220, img: "https://loremflickr.com/300/208/cupcake?lock=3" },
-  { id: 4, name: "Печенье с шоколадом", desc: "Хрустящее, с кусочками шоколада", weight: "250 г", price: 390, img: "https://loremflickr.com/300/208/cookie?lock=4" },
-  { id: 5, name: "Макарунс ассорти", desc: "6 шт, французские", weight: "150 г", price: 540, img: "https://loremflickr.com/300/208/macaron?lock=5" },
-  { id: 6, name: "Эклер с заварным кремом", desc: "4 шт, воздушное тесто", weight: "200 г", price: 450, img: "https://loremflickr.com/300/208/eclair?lock=6" },
-  { id: 7, name: "Торт Ягодный рай", desc: "Свежие фрукты и ягоды", weight: "1200 г", price: 1850, img: "https://loremflickr.com/300/208/cake?lock=7" },
-  { id: 8, name: "Капкейки Черничные", desc: "С черничным кремом", weight: "110 г", price: 240, img: "https://loremflickr.com/300/208/cupcake?lock=8" },
-  { id: 9, name: "Шоколадный торт", desc: "Бельгийский шоколад", weight: "950 г", price: 1750, img: "https://loremflickr.com/300/208/chocolate?lock=9" },
-  { id: 10, name: "Мини-пирожные", desc: "Ассорти 8 шт", weight: "400 г", price: 890, img: "https://loremflickr.com/300/208/pastry?lock=10" },
-  { id: 11, name: "Наполеон", desc: "Традиционный рецепт", weight: "850 г", price: 1450, img: "https://loremflickr.com/300/208/cake?lock=11" },
-  { id: 12, name: "Тирамису", desc: "Итальянская классика", weight: "700 г", price: 1550, img: "https://loremflickr.com/300/208/tiramisu?lock=12" },
-  { id: 13, name: "Торт Красный бархат", desc: "С кремчизом", weight: "1100 г", price: 1950, img: "https://loremflickr.com/300/208/cake?lock=13" },
-  { id: 14, name: "Чизкейк с ягодами", desc: "Клубника и малина", weight: "950 г", price: 1700, img: "https://loremflickr.com/300/208/cheesecake?lock=14" },
-  { id: 15, name: "Фруктовый торт", desc: "Свежие фрукты", weight: "1300 г", price: 2100, img: "https://loremflickr.com/300/208/cake?lock=15" },
-  { id: 16, name: "Шоколадный капкейк", desc: "С темным шоколадом", weight: "120 г", price: 250, img: "https://loremflickr.com/300/208/cupcake?lock=16" },
-  { id: 17, name: "Капкейки Праздничные", desc: "С декором", weight: "110 г", price: 280, img: "https://loremflickr.com/300/208/cupcake?lock=17" },
-  { id: 18, name: "Макарон Ассорти XL", desc: "12 шт разных вкусов", weight: "300 г", price: 980, img: "https://loremflickr.com/300/208/macaron?lock=18" },
-  { id: 19, name: "Брауни шоколадные", desc: "Влажные с орехами", weight: "300 г", price: 650, img: "https://loremflickr.com/300/208/brownie?lock=19" },
-  { id: 20, name: "Брауни премиум", desc: "С белым шоколадом", weight: "350 г", price: 720, img: "https://loremflickr.com/300/208/brownie?lock=20" },
-  { id: 21, name: "Пончики глазированные", desc: "6 шт с разной глазурью", weight: "350 г", price: 480, img: "https://loremflickr.com/300/208/donut?lock=21" },
-  { id: 22, name: "Пончик розовый", desc: "С клубничной глазурью", weight: "80 г", price: 120, img: "https://loremflickr.com/300/208/donut?lock=22" },
-  { id: 23, name: "Пончики с посыпкой", desc: "Яркие и вкусные", weight: "320 г", price: 450, img: "https://loremflickr.com/300/208/donut?lock=23" },
-  { id: 24, name: "Пирог черничный", desc: "Классический домашний", weight: "800 г", price: 1350, img: "https://loremflickr.com/300/208/pie?lock=24" },
-  { id: 25, name: "Тарт ягодный", desc: "С заварным кремом", weight: "600 г", price: 1250, img: "https://loremflickr.com/300/208/tart?lock=25" },
-  { id: 26, name: "Тарт фруктовый", desc: "Микс ягод и фруктов", weight: "650 г", price: 1400, img: "https://loremflickr.com/300/208/tart?lock=26" },
-  { id: 27, name: "Крем-брюле", desc: "Французский десерт", weight: "180 г", price: 380, img: "https://loremflickr.com/300/208/dessert?lock=27" },
-  { id: 28, name: "Крем-брюле премиум", desc: "С ванилью Мадагаскара", weight: "200 г", price: 450, img: "https://loremflickr.com/300/208/dessert?lock=28" },
-  { id: 29, name: "Маффины шоколадные", desc: "6 шт с шоколадной крошкой", weight: "320 г", price: 520, img: "https://loremflickr.com/300/208/muffin?lock=29" },
-  { id: 30, name: "Маффины черничные", desc: "Со свежей черникой", weight: "300 г", price: 550, img: "https://loremflickr.com/300/208/muffin?lock=30" },
+  { id: 1, name: "РњРµРґРѕРІРёРє РЅРµР¶РЅС‹Р№", desc: "РљР»Р°СЃСЃРёС‡РµСЃРєРёР№ РјРЅРѕРіРѕСЃР»РѕР№РЅС‹Р№ С‚РѕСЂС‚", weight: "900 Рі", price: 1350, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 2, name: "Р§РёР·РєРµР№Рє РќСЊСЋ-Р™РѕСЂРє", desc: "РљСЂРµРјРѕРІР°СЏ С‚РµРєСЃС‚СѓСЂР°", weight: "1000 Рі", price: 1600, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 3, name: "РљР°РїРєРµР№Рє РЎРѕР»С‘РЅР°СЏ РєР°СЂР°РјРµР»СЊ", desc: "РќРµР¶РЅС‹Р№ Р±РёСЃРєРІРёС‚", weight: "110 Рі", price: 220, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 4, name: "РџРµС‡РµРЅСЊРµ СЃ С€РѕРєРѕР»Р°РґРѕРј", desc: "РҐСЂСѓСЃС‚СЏС‰РµРµ, СЃ РєСѓСЃРѕС‡РєР°РјРё С€РѕРєРѕР»Р°РґР°", weight: "250 Рі", price: 390, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 5, name: "РњР°РєР°СЂСѓРЅСЃ Р°СЃСЃРѕСЂС‚Рё", desc: "6 С€С‚, С„СЂР°РЅС†СѓР·СЃРєРёРµ", weight: "150 Рі", price: 540, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 6, name: "Р­РєР»РµСЂ СЃ Р·Р°РІР°СЂРЅС‹Рј РєСЂРµРјРѕРј", desc: "4 С€С‚, РІРѕР·РґСѓС€РЅРѕРµ С‚РµСЃС‚Рѕ", weight: "200 Рі", price: 450, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 7, name: "РўРѕСЂС‚ РЇРіРѕРґРЅС‹Р№ СЂР°Р№", desc: "РЎРІРµР¶РёРµ С„СЂСѓРєС‚С‹ Рё СЏРіРѕРґС‹", weight: "1200 Рі", price: 1850, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 8, name: "РљР°РїРєРµР№РєРё Р§РµСЂРЅРёС‡РЅС‹Рµ", desc: "РЎ С‡РµСЂРЅРёС‡РЅС‹Рј РєСЂРµРјРѕРј", weight: "110 Рі", price: 240, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 9, name: "РЁРѕРєРѕР»Р°РґРЅС‹Р№ С‚РѕСЂС‚", desc: "Р‘РµР»СЊРіРёР№СЃРєРёР№ С€РѕРєРѕР»Р°Рґ", weight: "950 Рі", price: 1750, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 10, name: "РњРёРЅРё-РїРёСЂРѕР¶РЅС‹Рµ", desc: "РђСЃСЃРѕСЂС‚Рё 8 С€С‚", weight: "400 Рі", price: 890, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 11, name: "РќР°РїРѕР»РµРѕРЅ", desc: "РўСЂР°РґРёС†РёРѕРЅРЅС‹Р№ СЂРµС†РµРїС‚", weight: "850 Рі", price: 1450, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 12, name: "РўРёСЂР°РјРёСЃСѓ", desc: "РС‚Р°Р»СЊСЏРЅСЃРєР°СЏ РєР»Р°СЃСЃРёРєР°", weight: "700 Рі", price: 1550, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 13, name: "РўРѕСЂС‚ РљСЂР°СЃРЅС‹Р№ Р±Р°СЂС…Р°С‚", desc: "РЎ РєСЂРµРјС‡РёР·РѕРј", weight: "1100 Рі", price: 1950, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 14, name: "Р§РёР·РєРµР№Рє СЃ СЏРіРѕРґР°РјРё", desc: "РљР»СѓР±РЅРёРєР° Рё РјР°Р»РёРЅР°", weight: "950 Рі", price: 1700, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 15, name: "Р¤СЂСѓРєС‚РѕРІС‹Р№ С‚РѕСЂС‚", desc: "РЎРІРµР¶РёРµ С„СЂСѓРєС‚С‹", weight: "1300 Рі", price: 2100, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 16, name: "РЁРѕРєРѕР»Р°РґРЅС‹Р№ РєР°РїРєРµР№Рє", desc: "РЎ С‚РµРјРЅС‹Рј С€РѕРєРѕР»Р°РґРѕРј", weight: "120 Рі", price: 250, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 17, name: "РљР°РїРєРµР№РєРё РџСЂР°Р·РґРЅРёС‡РЅС‹Рµ", desc: "РЎ РґРµРєРѕСЂРѕРј", weight: "110 Рі", price: 280, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 18, name: "РњР°РєР°СЂРѕРЅ РђСЃСЃРѕСЂС‚Рё XL", desc: "12 С€С‚ СЂР°Р·РЅС‹С… РІРєСѓСЃРѕРІ", weight: "300 Рі", price: 980, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 19, name: "Р‘СЂР°СѓРЅРё С€РѕРєРѕР»Р°РґРЅС‹Рµ", desc: "Р’Р»Р°Р¶РЅС‹Рµ СЃ РѕСЂРµС…Р°РјРё", weight: "300 Рі", price: 650, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 20, name: "Р‘СЂР°СѓРЅРё РїСЂРµРјРёСѓРј", desc: "РЎ Р±РµР»С‹Рј С€РѕРєРѕР»Р°РґРѕРј", weight: "350 Рі", price: 720, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 21, name: "РџРѕРЅС‡РёРєРё РіР»Р°Р·РёСЂРѕРІР°РЅРЅС‹Рµ", desc: "6 С€С‚ СЃ СЂР°Р·РЅРѕР№ РіР»Р°Р·СѓСЂСЊСЋ", weight: "350 Рі", price: 480, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 22, name: "РџРѕРЅС‡РёРє СЂРѕР·РѕРІС‹Р№", desc: "РЎ РєР»СѓР±РЅРёС‡РЅРѕР№ РіР»Р°Р·СѓСЂСЊСЋ", weight: "80 Рі", price: 120, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 23, name: "РџРѕРЅС‡РёРєРё СЃ РїРѕСЃС‹РїРєРѕР№", desc: "РЇСЂРєРёРµ Рё РІРєСѓСЃРЅС‹Рµ", weight: "320 Рі", price: 450, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 24, name: "РџРёСЂРѕРі С‡РµСЂРЅРёС‡РЅС‹Р№", desc: "РљР»Р°СЃСЃРёС‡РµСЃРєРёР№ РґРѕРјР°С€РЅРёР№", weight: "800 Рі", price: 1350, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 25, name: "РўР°СЂС‚ СЏРіРѕРґРЅС‹Р№", desc: "РЎ Р·Р°РІР°СЂРЅС‹Рј РєСЂРµРјРѕРј", weight: "600 Рі", price: 1250, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 26, name: "РўР°СЂС‚ С„СЂСѓРєС‚РѕРІС‹Р№", desc: "РњРёРєСЃ СЏРіРѕРґ Рё С„СЂСѓРєС‚РѕРІ", weight: "650 Рі", price: 1400, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 27, name: "РљСЂРµРј-Р±СЂСЋР»Рµ", desc: "Р¤СЂР°РЅС†СѓР·СЃРєРёР№ РґРµСЃРµСЂС‚", weight: "180 Рі", price: 380, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 28, name: "РљСЂРµРј-Р±СЂСЋР»Рµ РїСЂРµРјРёСѓРј", desc: "РЎ РІР°РЅРёР»СЊСЋ РњР°РґР°РіР°СЃРєР°СЂР°", weight: "200 Рі", price: 450, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 29, name: "РњР°С„С„РёРЅС‹ С€РѕРєРѕР»Р°РґРЅС‹Рµ", desc: "6 С€С‚ СЃ С€РѕРєРѕР»Р°РґРЅРѕР№ РєСЂРѕС€РєРѕР№", weight: "320 Рі", price: 520, img: "https://picsum.photos/seed/sweet/300/208" },
+  { id: 30, name: "РњР°С„С„РёРЅС‹ С‡РµСЂРЅРёС‡РЅС‹Рµ", desc: "РЎРѕ СЃРІРµР¶РµР№ С‡РµСЂРЅРёРєРѕР№", weight: "300 Рі", price: 550, img: "https://picsum.photos/seed/sweet/300/208" },
 ];
 
 export default function App() {
@@ -115,12 +115,12 @@ export default function App() {
     localStorage.removeItem('currentUser');
     setCart([]);
     setCurrentSection('home');
-    alert('Вы вышли');
+    alert('Р’С‹ РІС‹С€Р»Рё');
   };
 
   const addToCart = (product: Product) => {
     if (!currentUser) {
-      alert('Добавление товаров доступно только после входа!');
+      alert('Р”РѕР±Р°РІР»РµРЅРёРµ С‚РѕРІР°СЂРѕРІ РґРѕСЃС‚СѓРїРЅРѕ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ РІС…РѕРґР°!');
       setShowAuthModal(true);
       return;
     }
@@ -130,7 +130,7 @@ export default function App() {
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
-    alert(`${product.name} добавлен в корзину`);
+    alert(`${product.name} РґРѕР±Р°РІР»РµРЅ РІ РєРѕСЂР·РёРЅСѓ`);
   };
 
   const removeFromCart = (index: number) => {
@@ -139,35 +139,35 @@ export default function App() {
 
   const handleAuth = () => {
     if (!authEmail || !authPassword) {
-      alert('Заполните поля');
+      alert('Р—Р°РїРѕР»РЅРёС‚Рµ РїРѕР»СЏ');
       return;
     }
     if (isLoginMode) {
       if (loginUser(authEmail, authPassword)) {
         setShowAuthModal(false);
-        alert('Добро пожаловать!');
+        alert('Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ!');
         setAuthEmail('');
         setAuthPassword('');
       } else {
-        alert('Неверный email или пароль');
+        alert('РќРµРІРµСЂРЅС‹Р№ email РёР»Рё РїР°СЂРѕР»СЊ');
       }
     } else {
       if (registerUser(authEmail, authPassword)) {
-        alert('Регистрация успешна! Войдите.');
+        alert('Р РµРіРёСЃС‚СЂР°С†РёСЏ СѓСЃРїРµС€РЅР°! Р’РѕР№РґРёС‚Рµ.');
         setIsLoginMode(true);
       } else {
-        alert('Email уже используется');
+        alert('Email СѓР¶Рµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ');
       }
     }
   };
 
   const checkout = () => {
     if (cart.length === 0) {
-      alert('Корзина пуста');
+      alert('РљРѕСЂР·РёРЅР° РїСѓСЃС‚Р°');
       return;
     }
     if (!currentUser) {
-      alert('Войдите в аккаунт для оформления');
+      alert('Р’РѕР№РґРёС‚Рµ РІ Р°РєРєР°СѓРЅС‚ РґР»СЏ РѕС„РѕСЂРјР»РµРЅРёСЏ');
       setShowAuthModal(true);
       return;
     }
@@ -182,7 +182,7 @@ export default function App() {
         date: new Date().toLocaleString('ru-RU'),
         items: orderItems,
         total: total,
-        status: 'Принят'
+        status: 'РџСЂРёРЅСЏС‚'
       };
       users[userIndex].orders.push(newOrder);
       saveUsers(users);
@@ -194,7 +194,7 @@ export default function App() {
 
     setCart([]);
     setShowCartModal(false);
-    alert('Заказ оформлен! Спасибо. История в личном кабинете.');
+    alert('Р—Р°РєР°Р· РѕС„РѕСЂРјР»РµРЅ! РЎРїР°СЃРёР±Рѕ. РСЃС‚РѕСЂРёСЏ РІ Р»РёС‡РЅРѕРј РєР°Р±РёРЅРµС‚Рµ.');
   };
 
   const cartCount = cart.reduce((sum, i) => sum + i.quantity, 0);
@@ -206,16 +206,16 @@ export default function App() {
         <div className="max-w-[1280px] mx-auto px-6">
           <nav className="flex justify-between items-center py-4 flex-wrap gap-4">
             <div className="text-3xl font-extrabold bg-gradient-to-r from-[#d48c54] to-[#5a3a2e] bg-clip-text text-transparent">
-              Сладкий<span className="text-[#5a3a2e] font-medium">Рай</span>
+              РЎР»Р°РґРєРёР№<span className="text-[#5a3a2e] font-medium">Р Р°Р№</span>
             </div>
 
             <ul className="flex gap-7 items-center flex-wrap">
               {[
-                { id: 'home', label: 'Главная' },
-                { id: 'catalog', label: 'Каталог' },
-                { id: 'advantages', label: 'Преимущества' },
-                { id: 'about', label: 'О нас' },
-                { id: 'contacts', label: 'Контакты' },
+                { id: 'home', label: 'Р“Р»Р°РІРЅР°СЏ' },
+                { id: 'catalog', label: 'РљР°С‚Р°Р»РѕРі' },
+                { id: 'advantages', label: 'РџСЂРµРёРјСѓС‰РµСЃС‚РІР°' },
+                { id: 'about', label: 'Рћ РЅР°СЃ' },
+                { id: 'contacts', label: 'РљРѕРЅС‚Р°РєС‚С‹' },
               ].map(item => (
                 <li key={item.id}>
                   <button
@@ -236,7 +236,7 @@ export default function App() {
                       currentSection === 'profile' ? 'text-[#d48c54] border-b-2 border-[#d48c54]' : 'hover:text-[#d48c54]'
                     }`}
                   >
-                    Мои заказы
+                    РњРѕРё Р·Р°РєР°Р·С‹
                   </button>
                 </li>
               )}
@@ -252,7 +252,7 @@ export default function App() {
                     onClick={logout}
                     className="border-2 border-[#d48c54] px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-[#d48c54] hover:text-white transition-all"
                   >
-                    Выйти
+                    Р’С‹Р№С‚Рё
                   </button>
                 </>
               ) : (
@@ -260,7 +260,7 @@ export default function App() {
                   onClick={() => { setShowAuthModal(true); setIsLoginMode(true); }}
                   className="border-2 border-[#d48c54] px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-[#d48c54] hover:text-white transition-all"
                 >
-                  Вход
+                  Р’С…РѕРґ
                 </button>
               )}
               <button onClick={() => setShowCartModal(true)} className="relative text-[#5a3a2e] hover:text-[#d48c54] transition-colors">
@@ -283,29 +283,29 @@ export default function App() {
           <section>
             <div className="bg-gradient-to-br from-[#fff4ea] to-[#ffe9db] rounded-[2.5rem] p-12 flex flex-wrap items-center justify-between gap-8 my-8 shadow-sm">
               <div className="flex-1 min-w-[300px]">
-                <h1 className="text-5xl font-bold text-[#5a3a2e] mb-4 leading-tight">Сладость, которую хочется дарить</h1>
-                <p className="text-xl mb-7 text-[#6b4c3b]">Торты, капкейки, печенье ручной работы из натуральных ингредиентов. Создаём праздник с любовью!</p>
+                <h1 className="text-5xl font-bold text-[#5a3a2e] mb-4 leading-tight">РЎР»Р°РґРѕСЃС‚СЊ, РєРѕС‚РѕСЂСѓСЋ С…РѕС‡РµС‚СЃСЏ РґР°СЂРёС‚СЊ</h1>
+                <p className="text-xl mb-7 text-[#6b4c3b]">РўРѕСЂС‚С‹, РєР°РїРєРµР№РєРё, РїРµС‡РµРЅСЊРµ СЂСѓС‡РЅРѕР№ СЂР°Р±РѕС‚С‹ РёР· РЅР°С‚СѓСЂР°Р»СЊРЅС‹С… РёРЅРіСЂРµРґРёРµРЅС‚РѕРІ. РЎРѕР·РґР°С‘Рј РїСЂР°Р·РґРЅРёРє СЃ Р»СЋР±РѕРІСЊСЋ!</p>
                 <button
                   onClick={() => setCurrentSection('catalog')}
                   className="bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white px-6 py-3 rounded-full font-bold hover:scale-95 transition-transform shadow-md"
                 >
-                  Смотреть каталог
+                  РЎРјРѕС‚СЂРµС‚СЊ РєР°С‚Р°Р»РѕРі
                 </button>
               </div>
               <div>
-                <img src="https://loremflickr.com/500/400/cake?lock=101" className="rounded-[32px] max-w-full shadow-lg" alt="красивый торт" />
+                <img src="https://picsum.photos/seed/ray//" className="rounded-[32px] max-w-full shadow-lg" alt="РєСЂР°СЃРёРІС‹Р№ С‚РѕСЂС‚" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
-              <img src="https://loremflickr.com/400/192/cake?lock=102" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="торт с фруктами" />
-              <img src="https://loremflickr.com/400/192/cupcake?lock=103" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="капкейк" />
-              <img src="https://loremflickr.com/400/192/macaron?lock=104" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="макароны" />
-              <img src="https://loremflickr.com/400/192/pastry?lock=105" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="декоративный торт" />
+              <img src="https://picsum.photos/seed/ray//" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="С‚РѕСЂС‚ СЃ С„СЂСѓРєС‚Р°РјРё" />
+              <img src="https://picsum.photos/seed/ray//" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="РєР°РїРєРµР№Рє" />
+              <img src="https://picsum.photos/seed/ray//" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="РјР°РєР°СЂРѕРЅС‹" />
+              <img src="https://picsum.photos/seed/ray//" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="РґРµРєРѕСЂР°С‚РёРІРЅС‹Р№ С‚РѕСЂС‚" />
             </div>
 
             <div className="text-center my-5">
-              <p className="text-[#b36b3c] font-medium">⭐ Узнайте, почему нас выбирают — перейдите в раздел «Преимущества»</p>
+              <p className="text-[#b36b3c] font-medium">в­ђ РЈР·РЅР°Р№С‚Рµ, РїРѕС‡РµРјСѓ РЅР°СЃ РІС‹Р±РёСЂР°СЋС‚ вЂ” РїРµСЂРµР№РґРёС‚Рµ РІ СЂР°Р·РґРµР» В«РџСЂРµРёРјСѓС‰РµСЃС‚РІР°В»</p>
             </div>
           </section>
         )}
@@ -313,17 +313,17 @@ export default function App() {
         {currentSection === 'advantages' && (
           <section>
             <div className="bg-gradient-to-br from-white to-[#fff9f2] rounded-[3rem] p-16 my-12 shadow-lg text-center relative overflow-hidden">
-              <div className="absolute bottom-[-40px] right-[-40px] text-[200px] opacity-[0.04] pointer-events-none">✨</div>
-              <h2 className="text-4xl font-bold text-[#5a3a2e] mb-3">✨ Идеальные десерты начинаются здесь</h2>
-              <div className="text-[#8a6a58] max-w-[600px] mx-auto mb-12 text-lg">Почему «Сладкий Рай» — выбор ценителей handmade-сладостей</div>
+              <div className="absolute bottom-[-40px] right-[-40px] text-[200px] opacity-[0.04] pointer-events-none">вњЁ</div>
+              <h2 className="text-4xl font-bold text-[#5a3a2e] mb-3">вњЁ РРґРµР°Р»СЊРЅС‹Рµ РґРµСЃРµСЂС‚С‹ РЅР°С‡РёРЅР°СЋС‚СЃСЏ Р·РґРµСЃСЊ</h2>
+              <div className="text-[#8a6a58] max-w-[600px] mx-auto mb-12 text-lg">РџРѕС‡РµРјСѓ В«РЎР»Р°РґРєРёР№ Р Р°Р№В» вЂ” РІС‹Р±РѕСЂ С†РµРЅРёС‚РµР»РµР№ handmade-СЃР»Р°РґРѕСЃС‚РµР№</div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
-                  { icon: '🌱', title: '100% Натурально', text: 'Масло высшего сорта, фермерские яйца, бельгийский шоколад. Никаких заменителей.' },
-                  { icon: '✨', title: 'Ручная работа', text: 'Каждый торт и капкейк создаются вручную с трепетом и вниманием к деталям.' },
-                  { icon: '👑', title: 'Авторский подход', text: 'Эксклюзивные рецепты и дизайн под ваш праздник. Мы воплотим любую идею.' },
-                  { icon: '📅', title: 'Срочность 24ч', text: 'Сладкий сюрприз даже если остался всего день. Оперативно и свежо.' },
-                  { icon: '🚚', title: 'Доставка свежести', text: 'Собственная курьерская служба или самовывоз в день приготовления.' },
-                  { icon: '💖', title: 'Любовь к клиентам', text: 'Индивидуальные скидки именинникам, подарки и персональные предложения.' },
+                  { icon: 'рџЊ±', title: '100% РќР°С‚СѓСЂР°Р»СЊРЅРѕ', text: 'РњР°СЃР»Рѕ РІС‹СЃС€РµРіРѕ СЃРѕСЂС‚Р°, С„РµСЂРјРµСЂСЃРєРёРµ СЏР№С†Р°, Р±РµР»СЊРіРёР№СЃРєРёР№ С€РѕРєРѕР»Р°Рґ. РќРёРєР°РєРёС… Р·Р°РјРµРЅРёС‚РµР»РµР№.' },
+                  { icon: 'вњЁ', title: 'Р СѓС‡РЅР°СЏ СЂР°Р±РѕС‚Р°', text: 'РљР°Р¶РґС‹Р№ С‚РѕСЂС‚ Рё РєР°РїРєРµР№Рє СЃРѕР·РґР°СЋС‚СЃСЏ РІСЂСѓС‡РЅСѓСЋ СЃ С‚СЂРµРїРµС‚РѕРј Рё РІРЅРёРјР°РЅРёРµРј Рє РґРµС‚Р°Р»СЏРј.' },
+                  { icon: 'рџ‘‘', title: 'РђРІС‚РѕСЂСЃРєРёР№ РїРѕРґС…РѕРґ', text: 'Р­РєСЃРєР»СЋР·РёРІРЅС‹Рµ СЂРµС†РµРїС‚С‹ Рё РґРёР·Р°Р№РЅ РїРѕРґ РІР°С€ РїСЂР°Р·РґРЅРёРє. РњС‹ РІРѕРїР»РѕС‚РёРј Р»СЋР±СѓСЋ РёРґРµСЋ.' },
+                  { icon: 'рџ“…', title: 'РЎСЂРѕС‡РЅРѕСЃС‚СЊ 24С‡', text: 'РЎР»Р°РґРєРёР№ СЃСЋСЂРїСЂРёР· РґР°Р¶Рµ РµСЃР»Рё РѕСЃС‚Р°Р»СЃСЏ РІСЃРµРіРѕ РґРµРЅСЊ. РћРїРµСЂР°С‚РёРІРЅРѕ Рё СЃРІРµР¶Рѕ.' },
+                  { icon: 'рџљљ', title: 'Р”РѕСЃС‚Р°РІРєР° СЃРІРµР¶РµСЃС‚Рё', text: 'РЎРѕР±СЃС‚РІРµРЅРЅР°СЏ РєСѓСЂСЊРµСЂСЃРєР°СЏ СЃР»СѓР¶Р±Р° РёР»Рё СЃР°РјРѕРІС‹РІРѕР· РІ РґРµРЅСЊ РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ.' },
+                  { icon: 'рџ’–', title: 'Р›СЋР±РѕРІСЊ Рє РєР»РёРµРЅС‚Р°Рј', text: 'РРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹Рµ СЃРєРёРґРєРё РёРјРµРЅРёРЅРЅРёРєР°Рј, РїРѕРґР°СЂРєРё Рё РїРµСЂСЃРѕРЅР°Р»СЊРЅС‹Рµ РїСЂРµРґР»РѕР¶РµРЅРёСЏ.' },
                 ].map((adv, idx) => (
                   <div
                     key={idx}
@@ -341,7 +341,7 @@ export default function App() {
 
         {currentSection === 'catalog' && (
           <section>
-            <h2 className="text-4xl font-bold text-center my-8 text-[#5a3a2e]">Наши десерты</h2>
+            <h2 className="text-4xl font-bold text-center my-8 text-[#5a3a2e]">РќР°С€Рё РґРµСЃРµСЂС‚С‹</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 my-10">
               {products.map(product => (
                 <div
@@ -352,12 +352,12 @@ export default function App() {
                   <div className="text-xl font-semibold my-2.5">{product.name}</div>
                   <div className="text-[#6b4c3b] text-sm">{product.desc}</div>
                   <div className="text-xs text-[#8a6a58] mt-1">{product.weight}</div>
-                  <div className="text-2xl font-bold text-[#d48c54] my-3">{product.price} ₽</div>
+                  <div className="text-2xl font-bold text-[#d48c54] my-3">{product.price} в‚Ѕ</div>
                   <button
                     onClick={() => addToCart(product)}
                     className="bg-[#5a3a2e] text-white w-full py-3 rounded-full font-bold hover:bg-[#b36b3c] transition-colors"
                   >
-                    Заказать
+                    Р—Р°РєР°Р·Р°С‚СЊ
                   </button>
                 </div>
               ))}
@@ -370,38 +370,38 @@ export default function App() {
             <div className="bg-[#fef5ec] rounded-[2rem] p-12 my-12">
               <div className="flex flex-wrap gap-10 items-center mb-8">
                 <div className="flex-1 min-w-[300px]">
-                  <h2 className="text-3xl font-bold mb-4 text-[#5a3a2e]">О нашей кондитерской</h2>
-                  <p className="mb-4 text-lg leading-relaxed"><strong>«Сладкий Рай»</strong> — семейная кондитерская, где мы создаём десерты с душой. Используем только натуральные масла, свежие яйца, премиальный шоколад.</p>
-                  <p className="mb-6 text-lg leading-relaxed">Шеф-кондитер с международными стажировками. Каждый торт — произведение искусства. Индивидуальный заказ — наша специалитетность: от веганских десертов до безглютеновых шедевров.</p>
+                  <h2 className="text-3xl font-bold mb-4 text-[#5a3a2e]">Рћ РЅР°С€РµР№ РєРѕРЅРґРёС‚РµСЂСЃРєРѕР№</h2>
+                  <p className="mb-4 text-lg leading-relaxed"><strong>В«РЎР»Р°РґРєРёР№ Р Р°Р№В»</strong> вЂ” СЃРµРјРµР№РЅР°СЏ РєРѕРЅРґРёС‚РµСЂСЃРєР°СЏ, РіРґРµ РјС‹ СЃРѕР·РґР°С‘Рј РґРµСЃРµСЂС‚С‹ СЃ РґСѓС€РѕР№. РСЃРїРѕР»СЊР·СѓРµРј С‚РѕР»СЊРєРѕ РЅР°С‚СѓСЂР°Р»СЊРЅС‹Рµ РјР°СЃР»Р°, СЃРІРµР¶РёРµ СЏР№С†Р°, РїСЂРµРјРёР°Р»СЊРЅС‹Р№ С€РѕРєРѕР»Р°Рґ.</p>
+                  <p className="mb-6 text-lg leading-relaxed">РЁРµС„-РєРѕРЅРґРёС‚РµСЂ СЃ РјРµР¶РґСѓРЅР°СЂРѕРґРЅС‹РјРё СЃС‚Р°Р¶РёСЂРѕРІРєР°РјРё. РљР°Р¶РґС‹Р№ С‚РѕСЂС‚ вЂ” РїСЂРѕРёР·РІРµРґРµРЅРёРµ РёСЃРєСѓСЃСЃС‚РІР°. РРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹Р№ Р·Р°РєР°Р· вЂ” РЅР°С€Р° СЃРїРµС†РёР°Р»РёС‚РµС‚РЅРѕСЃС‚СЊ: РѕС‚ РІРµРіР°РЅСЃРєРёС… РґРµСЃРµСЂС‚РѕРІ РґРѕ Р±РµР·РіР»СЋС‚РµРЅРѕРІС‹С… С€РµРґРµРІСЂРѕРІ.</p>
                   <button
                     onClick={() => setCurrentSection('catalog')}
                     className="bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white px-6 py-3 rounded-full font-bold hover:scale-95 transition-transform"
                   >
-                    Заказать десерт
+                    Р—Р°РєР°Р·Р°С‚СЊ РґРµСЃРµСЂС‚
                   </button>
                 </div>
                 <div className="flex-1 text-center">
-                  <img src="https://loremflickr.com/500/400/bakery?lock=106" className="rounded-[28px] w-full max-w-[400px] mx-auto shadow-md" alt="витрина кондитерской" />
+                  <img src="https://picsum.photos/seed/ray//" className="rounded-[28px] w-full max-w-[400px] mx-auto shadow-md" alt="РІРёС‚СЂРёРЅР° РєРѕРЅРґРёС‚РµСЂСЃРєРѕР№" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 <div className="relative rounded-2xl overflow-hidden shadow-lg group">
-                  <img src="https://loremflickr.com/500/256/baking?lock=107" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="процесс приготовления" />
+                  <img src="https://picsum.photos/seed/ray//" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="РїСЂРѕС†РµСЃСЃ РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h3 className="text-white font-bold text-lg">Процесс с любовью</h3>
+                    <h3 className="text-white font-bold text-lg">РџСЂРѕС†РµСЃСЃ СЃ Р»СЋР±РѕРІСЊСЋ</h3>
                   </div>
                 </div>
                 <div className="relative rounded-2xl overflow-hidden shadow-lg group">
-                  <img src="https://loremflickr.com/500/256/pastry?lock=108" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="свежая выпечка" />
+                  <img src="https://picsum.photos/seed/ray//" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="СЃРІРµР¶Р°СЏ РІС‹РїРµС‡РєР°" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h3 className="text-white font-bold text-lg">Свежая выпечка</h3>
+                    <h3 className="text-white font-bold text-lg">РЎРІРµР¶Р°СЏ РІС‹РїРµС‡РєР°</h3>
                   </div>
                 </div>
                 <div className="relative rounded-2xl overflow-hidden shadow-lg group">
-                  <img src="https://loremflickr.com/500/256/cake?lock=109" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="декорирование" />
+                  <img src="https://picsum.photos/seed/ray//" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="РґРµРєРѕСЂРёСЂРѕРІР°РЅРёРµ" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h3 className="text-white font-bold text-lg">Ручное декорирование</h3>
+                    <h3 className="text-white font-bold text-lg">Р СѓС‡РЅРѕРµ РґРµРєРѕСЂРёСЂРѕРІР°РЅРёРµ</h3>
                   </div>
                 </div>
               </div>
@@ -412,79 +412,79 @@ export default function App() {
         {currentSection === 'contacts' && (
           <section>
             <div className="bg-white rounded-[3rem] p-12 my-12 shadow-lg">
-              <h2 className="text-4xl font-bold text-center mb-12 text-[#5a3a2e]">Свяжитесь с нами</h2>
+              <h2 className="text-4xl font-bold text-center mb-12 text-[#5a3a2e]">РЎРІСЏР¶РёС‚РµСЃСЊ СЃ РЅР°РјРё</h2>
               <div className="grid md:grid-cols-2 gap-12">
                 <div className="bg-gradient-to-br from-[#fff9f2] to-[#ffe9db] rounded-[2rem] p-8 space-y-6">
-                  <h3 className="text-2xl font-bold text-[#5a3a2e] mb-6">Контактная информация</h3>
+                  <h3 className="text-2xl font-bold text-[#5a3a2e] mb-6">РљРѕРЅС‚Р°РєС‚РЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ</h3>
                   <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">📍</div>
+                    <div className="text-[#d48c54] text-2xl mt-1">рџ“Ќ</div>
                     <div>
-                      <div className="font-semibold text-lg">Адрес</div>
-                      <div className="text-[#6b4c3b]">г. Ленинградская, ул. Сладкая, 15</div>
+                      <div className="font-semibold text-lg">РђРґСЂРµСЃ</div>
+                      <div className="text-[#6b4c3b]">Рі. Р›РµРЅРёРЅРіСЂР°РґСЃРєР°СЏ, СѓР». РЎР»Р°РґРєР°СЏ, 15</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">📞</div>
+                    <div className="text-[#d48c54] text-2xl mt-1">рџ“ћ</div>
                     <div>
-                      <div className="font-semibold text-lg">Телефон</div>
+                      <div className="font-semibold text-lg">РўРµР»РµС„РѕРЅ</div>
                       <div className="text-[#6b4c3b]">+7 (999) 123-45-67</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">✉️</div>
+                    <div className="text-[#d48c54] text-2xl mt-1">вњ‰пёЏ</div>
                     <div>
                       <div className="font-semibold text-lg">Email</div>
                       <div className="text-[#6b4c3b]">sweet@cakes.ru</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">📸</div>
+                    <div className="text-[#d48c54] text-2xl mt-1">рџ“ё</div>
                     <div>
                       <div className="font-semibold text-lg">Instagram</div>
                       <div className="text-[#6b4c3b]">@sweet_ray_cakes</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">⏰</div>
+                    <div className="text-[#d48c54] text-2xl mt-1">вЏ°</div>
                     <div>
-                      <div className="font-semibold text-lg">Время работы</div>
-                      <div className="text-[#6b4c3b]">Пн-Вс: 9:00 - 21:00</div>
+                      <div className="font-semibold text-lg">Р’СЂРµРјСЏ СЂР°Р±РѕС‚С‹</div>
+                      <div className="text-[#6b4c3b]">РџРЅ-Р’СЃ: 9:00 - 21:00</div>
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-gradient-to-br from-[#f7e2cf] to-white rounded-[2rem] p-8">
-                  <h3 className="text-2xl font-bold text-[#5a3a2e] mb-6">Напишите нам</h3>
+                  <h3 className="text-2xl font-bold text-[#5a3a2e] mb-6">РќР°РїРёС€РёС‚Рµ РЅР°Рј</h3>
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
-                      alert('Сообщение отправлено! Менеджер свяжется с вами.');
+                      alert('РЎРѕРѕР±С‰РµРЅРёРµ РѕС‚РїСЂР°РІР»РµРЅРѕ! РњРµРЅРµРґР¶РµСЂ СЃРІСЏР¶РµС‚СЃСЏ СЃ РІР°РјРё.');
                       e.currentTarget.reset();
                     }}
                     className="space-y-4"
                   >
                     <input
                       type="text"
-                      placeholder="Ваше имя"
+                      placeholder="Р’Р°С€Рµ РёРјСЏ"
                       required
                       className="w-full px-5 py-3 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]"
                     />
                     <input
                       type="tel"
-                      placeholder="Телефон"
+                      placeholder="РўРµР»РµС„РѕРЅ"
                       required
                       className="w-full px-5 py-3 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]"
                     />
                     <textarea
                       rows={4}
-                      placeholder="Ваш вопрос или заказ"
+                      placeholder="Р’Р°С€ РІРѕРїСЂРѕСЃ РёР»Рё Р·Р°РєР°Р·"
                       className="w-full px-5 py-3 border border-[#e2cfbf] rounded-3xl bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54] resize-none"
                     />
                     <button
                       type="submit"
                       className="w-full bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white py-3 rounded-full font-bold hover:scale-98 transition-transform shadow-md"
                     >
-                      Отправить
+                      РћС‚РїСЂР°РІРёС‚СЊ
                     </button>
                   </form>
                 </div>
@@ -497,27 +497,27 @@ export default function App() {
           <section>
             <div className="bg-[#fff6ed] rounded-[2rem] p-12 my-12">
               <h2 className="text-3xl font-bold mb-4 text-[#5a3a2e] flex items-center gap-3">
-                <span className="text-4xl">👤</span>
-                Личный кабинет
+                <span className="text-4xl">рџ‘¤</span>
+                Р›РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚
               </h2>
               <p className="text-lg mb-6"><strong>{currentUser?.email}</strong></p>
               <div className="bg-[#fff9f3] p-6 rounded-[28px]">
-                <h3 className="text-2xl font-bold mb-4 text-[#5a3a2e]">История заказов</h3>
+                <h3 className="text-2xl font-bold mb-4 text-[#5a3a2e]">РСЃС‚РѕСЂРёСЏ Р·Р°РєР°Р·РѕРІ</h3>
                 {!currentUser?.orders || currentUser.orders.length === 0 ? (
-                  <p className="text-[#6b4c3b]">У вас пока нет заказов. Авторизуйтесь и добавьте товары!</p>
+                  <p className="text-[#6b4c3b]">РЈ РІР°СЃ РїРѕРєР° РЅРµС‚ Р·Р°РєР°Р·РѕРІ. РђРІС‚РѕСЂРёР·СѓР№С‚РµСЃСЊ Рё РґРѕР±Р°РІСЊС‚Рµ С‚РѕРІР°СЂС‹!</p>
                 ) : (
                   <ul className="space-y-3">
                     {[...currentUser.orders].reverse().map(order => (
                       <li key={order.id} className="bg-white p-4 rounded-[20px] shadow-sm">
-                        <div className="font-bold text-lg">Заказ #{order.id}</div>
+                        <div className="font-bold text-lg">Р—Р°РєР°Р· #{order.id}</div>
                         <div className="text-sm text-[#8a6a58] mb-2">{order.date}</div>
                         {order.items.map((item, idx) => (
                           <div key={idx} className="text-sm text-[#6b4c3b]">
-                            {item.name} x{item.quantity} — {item.price * item.quantity}₽
+                            {item.name} x{item.quantity} вЂ” {item.price * item.quantity}в‚Ѕ
                           </div>
                         ))}
                         <div className="mt-2 font-semibold text-[#d48c54]">
-                          Итого: {order.total}₽ | Статус: {order.status}
+                          РС‚РѕРіРѕ: {order.total}в‚Ѕ | РЎС‚Р°С‚СѓСЃ: {order.status}
                         </div>
                       </li>
                     ))}
@@ -530,15 +530,15 @@ export default function App() {
       </main>
 
       <footer className="bg-[#2d1f19] text-[#e2cfbf] text-center p-8 rounded-t-[2rem] mt-12">
-        <p>© 2025 Кондитерская «Сладкий Рай» — Торты и десерты на заказ. С любовью к сладкому.</p>
+        <p>В© 2025 РљРѕРЅРґРёС‚РµСЂСЃРєР°СЏ В«РЎР»Р°РґРєРёР№ Р Р°Р№В» вЂ” РўРѕСЂС‚С‹ Рё РґРµСЃРµСЂС‚С‹ РЅР° Р·Р°РєР°Р·. РЎ Р»СЋР±РѕРІСЊСЋ Рє СЃР»Р°РґРєРѕРјСѓ.</p>
       </footer>
 
       {showCartModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] p-4" onClick={() => setShowCartModal(false)}>
           <div className="bg-white w-full max-w-[450px] rounded-[40px] p-8 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-2xl font-bold mb-6 text-[#5a3a2e]">Ваша корзина</h3>
+            <h3 className="text-2xl font-bold mb-6 text-[#5a3a2e]">Р’Р°С€Р° РєРѕСЂР·РёРЅР°</h3>
             {cart.length === 0 ? (
-              <p className="text-center text-[#6b4c3b] py-8">Корзина пуста</p>
+              <p className="text-center text-[#6b4c3b] py-8">РљРѕСЂР·РёРЅР° РїСѓСЃС‚Р°</p>
             ) : (
               <>
                 <div className="space-y-3 mb-6 max-h-[400px] overflow-y-auto">
@@ -546,31 +546,31 @@ export default function App() {
                     <div key={idx} className="flex justify-between items-center bg-[#fff9f3] p-3 rounded-2xl">
                       <div>
                         <div className="font-semibold">{item.name}</div>
-                        <div className="text-sm text-[#8a6a58]">x{item.quantity} × {item.price}₽</div>
+                        <div className="text-sm text-[#8a6a58]">x{item.quantity} Г— {item.price}в‚Ѕ</div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="font-bold text-[#d48c54]">{item.price * item.quantity}₽</span>
+                        <span className="font-bold text-[#d48c54]">{item.price * item.quantity}в‚Ѕ</span>
                         <button onClick={() => removeFromCart(idx)} className="text-xl hover:scale-110 transition-transform">
-                          🗑️
+                          рџ—‘пёЏ
                         </button>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="font-bold text-xl mb-6 text-center text-[#5a3a2e]">Итого: {cartTotal} ₽</div>
+                <div className="font-bold text-xl mb-6 text-center text-[#5a3a2e]">РС‚РѕРіРѕ: {cartTotal} в‚Ѕ</div>
               </>
             )}
             <button
               onClick={checkout}
               className="w-full bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white py-3 rounded-full font-bold hover:scale-98 transition-transform mb-3"
             >
-              Оформить заказ
+              РћС„РѕСЂРјРёС‚СЊ Р·Р°РєР°Р·
             </button>
             <button
               onClick={() => setShowCartModal(false)}
               className="w-full text-[#d48c54] py-2 font-semibold hover:underline"
             >
-              Закрыть
+              Р—Р°РєСЂС‹С‚СЊ
             </button>
           </div>
         </div>
@@ -579,7 +579,7 @@ export default function App() {
       {showAuthModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] p-4" onClick={() => setShowAuthModal(false)}>
           <div className="bg-white w-full max-w-[450px] rounded-[40px] p-8 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-2xl font-bold mb-6 text-[#5a3a2e]">{isLoginMode ? 'Вход' : 'Регистрация'}</h3>
+            <h3 className="text-2xl font-bold mb-6 text-[#5a3a2e]">{isLoginMode ? 'Р’С…РѕРґ' : 'Р РµРіРёСЃС‚СЂР°С†РёСЏ'}</h3>
             <input
               type="text"
               placeholder="Email"
@@ -589,7 +589,7 @@ export default function App() {
             />
             <input
               type="password"
-              placeholder="Пароль"
+              placeholder="РџР°СЂРѕР»СЊ"
               value={authPassword}
               onChange={(e) => setAuthPassword(e.target.value)}
               className="w-full px-5 py-3 mb-6 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]"
@@ -598,19 +598,19 @@ export default function App() {
               onClick={handleAuth}
               className="w-full bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white py-3 rounded-full font-bold hover:scale-98 transition-transform mb-4"
             >
-              {isLoginMode ? 'Войти' : 'Создать аккаунт'}
+              {isLoginMode ? 'Р’РѕР№С‚Рё' : 'РЎРѕР·РґР°С‚СЊ Р°РєРєР°СѓРЅС‚'}
             </button>
             <div className="text-center text-sm mb-4">
-              {isLoginMode ? 'Нет аккаунта? ' : 'Уже есть аккаунт? '}
+              {isLoginMode ? 'РќРµС‚ Р°РєРєР°СѓРЅС‚Р°? ' : 'РЈР¶Рµ РµСЃС‚СЊ Р°РєРєР°СѓРЅС‚? '}
               <span className="text-[#d48c54] font-bold cursor-pointer hover:underline" onClick={() => setIsLoginMode(!isLoginMode)}>
-                {isLoginMode ? 'Зарегистрироваться' : 'Войти'}
+                {isLoginMode ? 'Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ' : 'Р’РѕР№С‚Рё'}
               </span>
             </div>
             <button
               onClick={() => setShowAuthModal(false)}
               className="w-full text-[#8a6a58] py-2 font-semibold hover:underline"
             >
-              Отмена
+              РћС‚РјРµРЅР°
             </button>
           </div>
         </div>
