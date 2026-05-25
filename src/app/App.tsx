@@ -28,36 +28,36 @@ interface Order {
 }
 
 const products: Product[] = [
-  { id: 1, name: "Медовик нежный", desc: "Классический многослойный торт", weight: "900 г", price: 1350, img: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=300&auto=format" },
-  { id: 2, name: "Чизкейк Нью-Йорк", desc: "Кремовая текстура", weight: "1000 г", price: 1600, img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=300&auto=format" },
-  { id: 3, name: "Капкейк Солёная карамель", desc: "Нежный бисквит", weight: "110 г", price: 220, img: "https://images.unsplash.com/photo-1555744038-d0bf77748106?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 4, name: "Печенье с шоколадом", desc: "Хрустящее, с кусочками шоколада", weight: "250 г", price: 390, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=300&auto=format" },
-  { id: 5, name: "Макарунс ассорти", desc: "6 шт, французские", weight: "150 г", price: 540, img: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 6, name: "Эклер с заварным кремом", desc: "4 шт, воздушное тесто", weight: "200 г", price: 450, img: "https://images.unsplash.com/photo-1711513335836-d6a138f7a340?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 7, name: "Торт Ягодный рай", desc: "Свежие фрукты и ягоды", weight: "1200 г", price: 1850, img: "https://images.unsplash.com/photo-1660383534593-6b5221ab80d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 8, name: "Капкейки Черничные", desc: "С черничным кремом", weight: "110 г", price: 240, img: "https://images.unsplash.com/photo-1469533778471-92a68acc3633?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 9, name: "Шоколадный торт", desc: "Бельгийский шоколад", weight: "950 г", price: 1750, img: "https://images.unsplash.com/photo-1648471233533-a13856a7f3ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 10, name: "Мини-пирожные", desc: "Ассорти 8 шт", weight: "400 г", price: 890, img: "https://images.unsplash.com/photo-1556953410-b77c8b035596?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 11, name: "Наполеон", desc: "Традиционный рецепт", weight: "850 г", price: 1450, img: "https://images.unsplash.com/photo-1541779972238-2c60cd11ffc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 12, name: "Тирамису", desc: "Итальянская классика", weight: "700 г", price: 1550, img: "https://images.unsplash.com/photo-1708175313814-679cb8e90d2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 13, name: "Торт Красный бархат", desc: "С кремчизом", weight: "1100 г", price: 1950, img: "https://images.unsplash.com/photo-1635888070574-beb32aa9b06d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 14, name: "Чизкейк с ягодами", desc: "Клубника и малина", weight: "950 г", price: 1700, img: "https://images.unsplash.com/photo-1711043484522-ad01c2bd769b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 15, name: "Фруктовый торт", desc: "Свежие фрукты", weight: "1300 г", price: 2100, img: "https://images.unsplash.com/photo-1559090337-8631216533fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 16, name: "Шоколадный капкейк", desc: "С темным шоколадом", weight: "120 г", price: 250, img: "https://images.unsplash.com/photo-1587668178277-295251f900ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 17, name: "Капкейки Праздничные", desc: "С декором", weight: "110 г", price: 280, img: "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 18, name: "Макарон Ассорти XL", desc: "12 шт разных вкусов", weight: "300 г", price: 980, img: "https://images.unsplash.com/photo-1558326567-98ae2405596b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 19, name: "Брауни шоколадные", desc: "Влажные с орехами", weight: "300 г", price: 650, img: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 20, name: "Брауни премиум", desc: "С белым шоколадом", weight: "350 г", price: 720, img: "https://images.unsplash.com/photo-1636743715220-d8f8dd900b87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 21, name: "Пончики глазированные", desc: "6 шт с разной глазурью", weight: "350 г", price: 480, img: "https://images.unsplash.com/photo-1514517521153-1be72277b32f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 22, name: "Пончик розовый", desc: "С клубничной глазурью", weight: "80 г", price: 120, img: "https://images.unsplash.com/photo-1609873539027-d4ad052cb6a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 23, name: "Пончики с посыпкой", desc: "Яркие и вкусные", weight: "320 г", price: 450, img: "https://images.unsplash.com/photo-1516919549054-e08258825f80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 24, name: "Пирог черничный", desc: "Классический домашний", weight: "800 г", price: 1350, img: "https://images.unsplash.com/photo-1476887334197-56adbf254e1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 25, name: "Тарт ягодный", desc: "С заварным кремом", weight: "600 г", price: 1250, img: "https://images.unsplash.com/photo-1634719134538-aa1fcf7be10f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 26, name: "Тарт фруктовый", desc: "Микс ягод и фруктов", weight: "650 г", price: 1400, img: "https://images.unsplash.com/photo-1761328421715-83c397abe883?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 27, name: "Крем-брюле", desc: "Французский десерт", weight: "180 г", price: 380, img: "https://images.unsplash.com/photo-1676300184943-09b2a08319a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 28, name: "Крем-брюле премиум", desc: "С ванилью Мадагаскара", weight: "200 г", price: 450, img: "https://images.unsplash.com/photo-1615235739538-95040f341ba8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 29, name: "Маффины шоколадные", desc: "6 шт с шоколадной крошкой", weight: "320 г", price: 520, img: "https://images.unsplash.com/photo-1593187623747-7ea827ad1013?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
-  { id: 30, name: "Маффины черничные", desc: "Со свежей черникой", weight: "300 г", price: 550, img: "https://images.unsplash.com/photo-1722251172903-cc8774501df7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300" },
+  { id: 1, name: "Медовик нежный", desc: "Классический многослойный торт", weight: "900 г", price: 1350, img: "https://loremflickr.com/300/208/cake?lock=1" },
+  { id: 2, name: "Чизкейк Нью-Йорк", desc: "Кремовая текстура", weight: "1000 г", price: 1600, img: "https://loremflickr.com/300/208/cheesecake?lock=2" },
+  { id: 3, name: "Капкейк Солёная карамель", desc: "Нежный бисквит", weight: "110 г", price: 220, img: "https://loremflickr.com/300/208/cupcake?lock=3" },
+  { id: 4, name: "Печенье с шоколадом", desc: "Хрустящее, с кусочками шоколада", weight: "250 г", price: 390, img: "https://loremflickr.com/300/208/cookie?lock=4" },
+  { id: 5, name: "Макарунс ассорти", desc: "6 шт, французские", weight: "150 г", price: 540, img: "https://loremflickr.com/300/208/macaron?lock=5" },
+  { id: 6, name: "Эклер с заварным кремом", desc: "4 шт, воздушное тесто", weight: "200 г", price: 450, img: "https://loremflickr.com/300/208/eclair?lock=6" },
+  { id: 7, name: "Торт Ягодный рай", desc: "Свежие фрукты и ягоды", weight: "1200 г", price: 1850, img: "https://loremflickr.com/300/208/cake?lock=7" },
+  { id: 8, name: "Капкейки Черничные", desc: "С черничным кремом", weight: "110 г", price: 240, img: "https://loremflickr.com/300/208/cupcake?lock=8" },
+  { id: 9, name: "Шоколадный торт", desc: "Бельгийский шоколад", weight: "950 г", price: 1750, img: "https://loremflickr.com/300/208/chocolate?lock=9" },
+  { id: 10, name: "Мини-пирожные", desc: "Ассорти 8 шт", weight: "400 г", price: 890, img: "https://loremflickr.com/300/208/pastry?lock=10" },
+  { id: 11, name: "Наполеон", desc: "Традиционный рецепт", weight: "850 г", price: 1450, img: "https://loremflickr.com/300/208/cake?lock=11" },
+  { id: 12, name: "Тирамису", desc: "Итальянская классика", weight: "700 г", price: 1550, img: "https://loremflickr.com/300/208/tiramisu?lock=12" },
+  { id: 13, name: "Торт Красный бархат", desc: "С кремчизом", weight: "1100 г", price: 1950, img: "https://loremflickr.com/300/208/cake?lock=13" },
+  { id: 14, name: "Чизкейк с ягодами", desc: "Клубника и малина", weight: "950 г", price: 1700, img: "https://loremflickr.com/300/208/cheesecake?lock=14" },
+  { id: 15, name: "Фруктовый торт", desc: "Свежие фрукты", weight: "1300 г", price: 2100, img: "https://loremflickr.com/300/208/cake?lock=15" },
+  { id: 16, name: "Шоколадный капкейк", desc: "С темным шоколадом", weight: "120 г", price: 250, img: "https://loremflickr.com/300/208/cupcake?lock=16" },
+  { id: 17, name: "Капкейки Праздничные", desc: "С декором", weight: "110 г", price: 280, img: "https://loremflickr.com/300/208/cupcake?lock=17" },
+  { id: 18, name: "Макарон Ассорти XL", desc: "12 шт разных вкусов", weight: "300 г", price: 980, img: "https://loremflickr.com/300/208/macaron?lock=18" },
+  { id: 19, name: "Брауни шоколадные", desc: "Влажные с орехами", weight: "300 г", price: 650, img: "https://loremflickr.com/300/208/brownie?lock=19" },
+  { id: 20, name: "Брауни премиум", desc: "С белым шоколадом", weight: "350 г", price: 720, img: "https://loremflickr.com/300/208/brownie?lock=20" },
+  { id: 21, name: "Пончики глазированные", desc: "6 шт с разной глазурью", weight: "350 г", price: 480, img: "https://loremflickr.com/300/208/donut?lock=21" },
+  { id: 22, name: "Пончик розовый", desc: "С клубничной глазурью", weight: "80 г", price: 120, img: "https://loremflickr.com/300/208/donut?lock=22" },
+  { id: 23, name: "Пончики с посыпкой", desc: "Яркие и вкусные", weight: "320 г", price: 450, img: "https://loremflickr.com/300/208/donut?lock=23" },
+  { id: 24, name: "Пирог черничный", desc: "Классический домашний", weight: "800 г", price: 1350, img: "https://loremflickr.com/300/208/pie?lock=24" },
+  { id: 25, name: "Тарт ягодный", desc: "С заварным кремом", weight: "600 г", price: 1250, img: "https://loremflickr.com/300/208/tart?lock=25" },
+  { id: 26, name: "Тарт фруктовый", desc: "Микс ягод и фруктов", weight: "650 г", price: 1400, img: "https://loremflickr.com/300/208/tart?lock=26" },
+  { id: 27, name: "Крем-брюле", desc: "Французский десерт", weight: "180 г", price: 380, img: "https://loremflickr.com/300/208/dessert?lock=27" },
+  { id: 28, name: "Крем-брюле премиум", desc: "С ванилью Мадагаскара", weight: "200 г", price: 450, img: "https://loremflickr.com/300/208/dessert?lock=28" },
+  { id: 29, name: "Маффины шоколадные", desc: "6 шт с шоколадной крошкой", weight: "320 г", price: 520, img: "https://loremflickr.com/300/208/muffin?lock=29" },
+  { id: 30, name: "Маффины черничные", desc: "Со свежей черникой", weight: "300 г", price: 550, img: "https://loremflickr.com/300/208/muffin?lock=30" },
 ];
 
 export default function App() {
@@ -293,15 +293,15 @@ export default function App() {
                 </button>
               </div>
               <div>
-                <img src="https://images.unsplash.com/photo-1579356094148-9b74dab60f5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500" className="rounded-[32px] max-w-full shadow-lg" alt="красивый торт" />
+                <img src="https://loremflickr.com/500/400/cake?lock=101" className="rounded-[32px] max-w-full shadow-lg" alt="красивый торт" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
-              <img src="https://images.unsplash.com/photo-1660383534593-6b5221ab80d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="торт с фруктами" />
-              <img src="https://images.unsplash.com/photo-1587668178277-295251f900ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="капкейк" />
-              <img src="https://images.unsplash.com/photo-1558326567-98ae2405596b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="макароны" />
-              <img src="https://images.unsplash.com/photo-1628509633348-a39defbc44c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="декоративный торт" />
+              <img src="https://loremflickr.com/400/192/cake?lock=102" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="торт с фруктами" />
+              <img src="https://loremflickr.com/400/192/cupcake?lock=103" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="капкейк" />
+              <img src="https://loremflickr.com/400/192/macaron?lock=104" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="макароны" />
+              <img src="https://loremflickr.com/400/192/pastry?lock=105" className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="декоративный торт" />
             </div>
 
             <div className="text-center my-5">
@@ -381,25 +381,25 @@ export default function App() {
                   </button>
                 </div>
                 <div className="flex-1 text-center">
-                  <img src="https://images.unsplash.com/photo-1505285360-458ff677f029?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500" className="rounded-[28px] w-full max-w-[400px] mx-auto shadow-md" alt="витрина кондитерской" />
+                  <img src="https://loremflickr.com/500/400/bakery?lock=106" className="rounded-[28px] w-full max-w-[400px] mx-auto shadow-md" alt="витрина кондитерской" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 <div className="relative rounded-2xl overflow-hidden shadow-lg group">
-                  <img src="https://images.unsplash.com/photo-1549590143-d5855148a9d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="процесс приготовления" />
+                  <img src="https://loremflickr.com/500/256/baking?lock=107" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="процесс приготовления" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h3 className="text-white font-bold text-lg">Процесс с любовью</h3>
                   </div>
                 </div>
                 <div className="relative rounded-2xl overflow-hidden shadow-lg group">
-                  <img src="https://images.unsplash.com/photo-1499889808931-317a0255c0e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="свежая выпечка" />
+                  <img src="https://loremflickr.com/500/256/pastry?lock=108" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="свежая выпечка" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h3 className="text-white font-bold text-lg">Свежая выпечка</h3>
                   </div>
                 </div>
                 <div className="relative rounded-2xl overflow-hidden shadow-lg group">
-                  <img src="https://images.unsplash.com/photo-1659271940584-25589f320198?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="декорирование" />
+                  <img src="https://loremflickr.com/500/256/cake?lock=109" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="декорирование" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h3 className="text-white font-bold text-lg">Ручное декорирование</h3>
                   </div>
