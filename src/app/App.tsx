@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const si = (c1: string, c2: string, w = 300, h = 208) =>
-  `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='${c1.replace('#','%23')}'/%3E%3Cstop offset='100%25' stop-color='${c2.replace('#','%23')}'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='${w}' height='${h}' fill='url(%23g)' rx='16'/%3E%3C/svg%3E`;
+const gr = (c1: string, c2: string) => `linear-gradient(135deg, ${c1}, ${c2})`;
 
 interface Product {
   id: number;
@@ -31,36 +30,36 @@ interface Order {
 }
 
 const products: Product[] = [
-  { id: 1,  name: "Медовик нежный",          desc: "Классический многослойный торт",   weight: "900 г",  price: 1350, img: si('#fff4ea','#f0c070') },
-  { id: 2,  name: "Чизкейк Нью-Йорк",        desc: "Кремовая текстура",               weight: "1000 г", price: 1600, img: si('#fffde7','#fff3c4') },
-  { id: 3,  name: "Капкейк Солёная карамель", desc: "Нежный бисквит",                  weight: "110 г",  price: 220,  img: si('#ffe4ef','#f5a7c0') },
-  { id: 4,  name: "Печенье с шоколадом",      desc: "Хрустящее, с кусочками шоколада", weight: "250 г",  price: 390,  img: si('#fff8e1','#e8a855') },
-  { id: 5,  name: "Макарунс ассорти",         desc: "6 шт, французские",               weight: "150 г",  price: 540,  img: si('#f3e5f5','#ce93d8') },
-  { id: 6,  name: "Эклер с заварным кремом",  desc: "4 шт, воздушное тесто",           weight: "200 г",  price: 450,  img: si('#fbe9e7','#d4a882') },
-  { id: 7,  name: "Торт Ягодный рай",         desc: "Свежие фрукты и ягоды",           weight: "1200 г", price: 1850, img: si('#fce4ec','#f48fb1') },
-  { id: 8,  name: "Капкейки Черничные",       desc: "С черничным кремом",              weight: "110 г",  price: 240,  img: si('#ede7f6','#9575cd') },
-  { id: 9,  name: "Шоколадный торт",          desc: "Бельгийский шоколад",             weight: "950 г",  price: 1750, img: si('#efebe9','#8d6e63') },
-  { id: 10, name: "Мини-пирожные",            desc: "Ассорти 8 шт",                    weight: "400 г",  price: 890,  img: si('#fff9f2','#f7c9a0') },
-  { id: 11, name: "Наполеон",                 desc: "Традиционный рецепт",             weight: "850 г",  price: 1450, img: si('#fffde7','#f9d276') },
-  { id: 12, name: "Тирамису",                 desc: "Итальянская классика",            weight: "700 г",  price: 1550, img: si('#efebe9','#a1887f') },
-  { id: 13, name: "Торт Красный бархат",      desc: "С кремчизом",                     weight: "1100 г", price: 1950, img: si('#fce4ec','#e57373') },
-  { id: 14, name: "Чизкейк с ягодами",        desc: "Клубника и малина",               weight: "950 г",  price: 1700, img: si('#fce4ec','#ef9a9a') },
-  { id: 15, name: "Фруктовый торт",           desc: "Свежие фрукты",                   weight: "1300 г", price: 2100, img: si('#f1f8e9','#aed581') },
-  { id: 16, name: "Шоколадный капкейк",       desc: "С темным шоколадом",              weight: "120 г",  price: 250,  img: si('#fbe9e7','#ce8965') },
-  { id: 17, name: "Капкейки Праздничные",     desc: "С декором",                       weight: "110 г",  price: 280,  img: si('#fff8e1','#ffe57f') },
-  { id: 18, name: "Макарон Ассорти XL",       desc: "12 шт разных вкусов",             weight: "300 г",  price: 980,  img: si('#f3e5f5','#b39ddb') },
-  { id: 19, name: "Брауни шоколадные",        desc: "Влажные с орехами",               weight: "300 г",  price: 650,  img: si('#efebe9','#9e8070') },
-  { id: 20, name: "Брауни премиум",           desc: "С белым шоколадом",               weight: "350 г",  price: 720,  img: si('#fafafa','#e0d0c8') },
-  { id: 21, name: "Пончики глазированные",    desc: "6 шт с разной глазурью",          weight: "350 г",  price: 480,  img: si('#fce4ec','#f06292') },
-  { id: 22, name: "Пончик розовый",           desc: "С клубничной глазурью",           weight: "80 г",   price: 120,  img: si('#ffe4ef','#ec407a') },
-  { id: 23, name: "Пончики с посыпкой",       desc: "Яркие и вкусные",                 weight: "320 г",  price: 450,  img: si('#e8f5e9','#81c784') },
-  { id: 24, name: "Пирог черничный",          desc: "Классический домашний",           weight: "800 г",  price: 1350, img: si('#ede7f6','#7986cb') },
-  { id: 25, name: "Тарт ягодный",             desc: "С заварным кремом",               weight: "600 г",  price: 1250, img: si('#fce4ec','#ef9a9a') },
-  { id: 26, name: "Тарт фруктовый",           desc: "Микс ягод и фруктов",             weight: "650 г",  price: 1400, img: si('#f9fbe7','#c5e1a5') },
-  { id: 27, name: "Крем-брюле",               desc: "Французский десерт",              weight: "180 г",  price: 380,  img: si('#fff8e1','#ffcc80') },
-  { id: 28, name: "Крем-брюле премиум",       desc: "С ванилью Мадагаскара",           weight: "200 г",  price: 450,  img: si('#fff3e0','#ffb74d') },
-  { id: 29, name: "Маффины шоколадные",       desc: "6 шт с шоколадной крошкой",       weight: "320 г",  price: 520,  img: si('#efebe9','#bcaaa4') },
-  { id: 30, name: "Маффины черничные",        desc: "Со свежей черникой",              weight: "300 г",  price: 550,  img: si('#ede7f6','#b39ddb') },
+  { id: 1,  name: "Медовик нежный",          desc: "Классический многослойный торт",   weight: "900 г",  price: 1350, img: gr('#fff4ea','#f0c070') },
+  { id: 2,  name: "Чизкейк Нью-Йорк",        desc: "Кремовая текстура",               weight: "1000 г", price: 1600, img: gr('#fffde7','#ffe082') },
+  { id: 3,  name: "Капкейк Солёная карамель", desc: "Нежный бисквит",                  weight: "110 г",  price: 220,  img: gr('#ffe4ef','#f5a7c0') },
+  { id: 4,  name: "Печенье с шоколадом",      desc: "Хрустящее, с кусочками шоколада", weight: "250 г",  price: 390,  img: gr('#fff8e1','#e8a855') },
+  { id: 5,  name: "Макарунс ассорти",         desc: "6 шт, французские",               weight: "150 г",  price: 540,  img: gr('#f3e5f5','#ce93d8') },
+  { id: 6,  name: "Эклер с заварным кремом",  desc: "4 шт, воздушное тесто",           weight: "200 г",  price: 450,  img: gr('#fbe9e7','#d4a882') },
+  { id: 7,  name: "Торт Ягодный рай",         desc: "Свежие фрукты и ягоды",           weight: "1200 г", price: 1850, img: gr('#fce4ec','#f48fb1') },
+  { id: 8,  name: "Капкейки Черничные",       desc: "С черничным кремом",              weight: "110 г",  price: 240,  img: gr('#ede7f6','#9575cd') },
+  { id: 9,  name: "Шоколадный торт",          desc: "Бельгийский шоколад",             weight: "950 г",  price: 1750, img: gr('#efebe9','#8d6e63') },
+  { id: 10, name: "Мини-пирожные",            desc: "Ассорти 8 шт",                    weight: "400 г",  price: 890,  img: gr('#fff9f2','#f7c9a0') },
+  { id: 11, name: "Наполеон",                 desc: "Традиционный рецепт",             weight: "850 г",  price: 1450, img: gr('#fffde7','#f9d276') },
+  { id: 12, name: "Тирамису",                 desc: "Итальянская классика",            weight: "700 г",  price: 1550, img: gr('#efebe9','#a1887f') },
+  { id: 13, name: "Торт Красный бархат",      desc: "С кремчизом",                     weight: "1100 г", price: 1950, img: gr('#fce4ec','#e57373') },
+  { id: 14, name: "Чизкейк с ягодами",        desc: "Клубника и малина",               weight: "950 г",  price: 1700, img: gr('#fce4ec','#ef9a9a') },
+  { id: 15, name: "Фруктовый торт",           desc: "Свежие фрукты",                   weight: "1300 г", price: 2100, img: gr('#f1f8e9','#aed581') },
+  { id: 16, name: "Шоколадный капкейк",       desc: "С темным шоколадом",              weight: "120 г",  price: 250,  img: gr('#fbe9e7','#ce8965') },
+  { id: 17, name: "Капкейки Праздничные",     desc: "С декором",                       weight: "110 г",  price: 280,  img: gr('#fff8e1','#ffe57f') },
+  { id: 18, name: "Макарон Ассорти XL",       desc: "12 шт разных вкусов",             weight: "300 г",  price: 980,  img: gr('#f3e5f5','#b39ddb') },
+  { id: 19, name: "Брауни шоколадные",        desc: "Влажные с орехами",               weight: "300 г",  price: 650,  img: gr('#efebe9','#9e8070') },
+  { id: 20, name: "Брауни премиум",           desc: "С белым шоколадом",               weight: "350 г",  price: 720,  img: gr('#fafafa','#e0d0c8') },
+  { id: 21, name: "Пончики глазированные",    desc: "6 шт с разной глазурью",          weight: "350 г",  price: 480,  img: gr('#fce4ec','#f06292') },
+  { id: 22, name: "Пончик розовый",           desc: "С клубничной глазурью",           weight: "80 г",   price: 120,  img: gr('#ffe4ef','#ec407a') },
+  { id: 23, name: "Пончики с посыпкой",       desc: "Яркие и вкусные",                 weight: "320 г",  price: 450,  img: gr('#e8f5e9','#81c784') },
+  { id: 24, name: "Пирог черничный",          desc: "Классический домашний",           weight: "800 г",  price: 1350, img: gr('#ede7f6','#7986cb') },
+  { id: 25, name: "Тарт ягодный",             desc: "С заварным кремом",               weight: "600 г",  price: 1250, img: gr('#fce4ec','#ef9a9a') },
+  { id: 26, name: "Тарт фруктовый",           desc: "Микс ягод и фруктов",             weight: "650 г",  price: 1400, img: gr('#f9fbe7','#c5e1a5') },
+  { id: 27, name: "Крем-брюле",               desc: "Французский десерт",              weight: "180 г",  price: 380,  img: gr('#fff8e1','#ffcc80') },
+  { id: 28, name: "Крем-брюле премиум",       desc: "С ванилью Мадагаскара",           weight: "200 г",  price: 450,  img: gr('#fff3e0','#ffb74d') },
+  { id: 29, name: "Маффины шоколадные",       desc: "6 шт с шоколадной крошкой",       weight: "320 г",  price: 520,  img: gr('#efebe9','#bcaaa4') },
+  { id: 30, name: "Маффины черничные",        desc: "Со свежей черникой",              weight: "300 г",  price: 550,  img: gr('#ede7f6','#b39ddb') },
 ];
 
 export default function App() {
@@ -76,7 +75,6 @@ export default function App() {
   useEffect(() => {
     const savedCart = localStorage.getItem('sweetCart');
     if (savedCart) setCart(JSON.parse(savedCart));
-
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) setCurrentUser(JSON.parse(savedUser));
   }, []);
@@ -85,13 +83,8 @@ export default function App() {
     localStorage.setItem('sweetCart', JSON.stringify(cart));
   }, [cart]);
 
-  const getUsers = (): User[] => {
-    return JSON.parse(localStorage.getItem('users') || '[]');
-  };
-
-  const saveUsers = (users: User[]) => {
-    localStorage.setItem('users', JSON.stringify(users));
-  };
+  const getUsers = (): User[] => JSON.parse(localStorage.getItem('users') || '[]');
+  const saveUsers = (users: User[]) => localStorage.setItem('users', JSON.stringify(users));
 
   const registerUser = (email: string, password: string): boolean => {
     const users = getUsers();
@@ -136,65 +129,39 @@ export default function App() {
     alert(`${product.name} добавлен в корзину`);
   };
 
-  const removeFromCart = (index: number) => {
-    setCart(cart.filter((_, i) => i !== index));
-  };
+  const removeFromCart = (index: number) => setCart(cart.filter((_, i) => i !== index));
 
   const handleAuth = () => {
-    if (!authEmail || !authPassword) {
-      alert('Заполните поля');
-      return;
-    }
+    if (!authEmail || !authPassword) { alert('Заполните поля'); return; }
     if (isLoginMode) {
       if (loginUser(authEmail, authPassword)) {
         setShowAuthModal(false);
         alert('Добро пожаловать!');
-        setAuthEmail('');
-        setAuthPassword('');
-      } else {
-        alert('Неверный email или пароль');
-      }
+        setAuthEmail(''); setAuthPassword('');
+      } else { alert('Неверный email или пароль'); }
     } else {
       if (registerUser(authEmail, authPassword)) {
         alert('Регистрация успешна! Войдите.');
         setIsLoginMode(true);
-      } else {
-        alert('Email уже используется');
-      }
+      } else { alert('Email уже используется'); }
     }
   };
 
   const checkout = () => {
-    if (cart.length === 0) {
-      alert('Корзина пуста');
-      return;
-    }
-    if (!currentUser) {
-      alert('Войдите в аккаунт для оформления');
-      setShowAuthModal(true);
-      return;
-    }
+    if (cart.length === 0) { alert('Корзина пуста'); return; }
+    if (!currentUser) { alert('Войдите в аккаунт для оформления'); setShowAuthModal(true); return; }
     const total = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
     const orderItems = cart.map(i => ({ name: i.name, quantity: i.quantity, price: i.price }));
-
     const users = getUsers();
     const userIndex = users.findIndex(u => u.email === currentUser.email);
     if (userIndex !== -1) {
-      const newOrder: Order = {
-        id: Date.now(),
-        date: new Date().toLocaleString('ru-RU'),
-        items: orderItems,
-        total: total,
-        status: 'Принят'
-      };
+      const newOrder: Order = { id: Date.now(), date: new Date().toLocaleString('ru-RU'), items: orderItems, total, status: 'Принят' };
       users[userIndex].orders.push(newOrder);
       saveUsers(users);
-
       const updatedUser = { email: currentUser.email, orders: users[userIndex].orders };
       setCurrentUser(updatedUser);
       localStorage.setItem('currentUser', JSON.stringify(updatedUser));
     }
-
     setCart([]);
     setShowCartModal(false);
     alert('Заказ оформлен! Спасибо. История в личном кабинете.');
@@ -211,7 +178,6 @@ export default function App() {
             <div className="text-3xl font-extrabold bg-gradient-to-r from-[#d48c54] to-[#5a3a2e] bg-clip-text text-transparent">
               Сладкий<span className="text-[#5a3a2e] font-medium">Рай</span>
             </div>
-
             <ul className="flex gap-7 items-center flex-wrap">
               {[
                 { id: 'home', label: 'Главная' },
@@ -223,57 +189,33 @@ export default function App() {
                 <li key={item.id}>
                   <button
                     onClick={() => setCurrentSection(item.id)}
-                    className={`font-semibold text-[#4b2e24] transition-all pb-1.5 ${
-                      currentSection === item.id ? 'text-[#d48c54] border-b-2 border-[#d48c54]' : 'hover:text-[#d48c54]'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
+                    className={`font-semibold text-[#4b2e24] transition-all pb-1.5 ${currentSection === item.id ? 'text-[#d48c54] border-b-2 border-[#d48c54]' : 'hover:text-[#d48c54]'}`}
+                  >{item.label}</button>
                 </li>
               ))}
               {currentUser && (
                 <li>
-                  <button
-                    onClick={() => setCurrentSection('profile')}
-                    className={`font-semibold text-[#4b2e24] transition-all pb-1.5 ${
-                      currentSection === 'profile' ? 'text-[#d48c54] border-b-2 border-[#d48c54]' : 'hover:text-[#d48c54]'
-                    }`}
-                  >
-                    Мои заказы
-                  </button>
+                  <button onClick={() => setCurrentSection('profile')}
+                    className={`font-semibold text-[#4b2e24] transition-all pb-1.5 ${currentSection === 'profile' ? 'text-[#d48c54] border-b-2 border-[#d48c54]' : 'hover:text-[#d48c54]'}`}
+                  >Мои заказы</button>
                 </li>
               )}
             </ul>
-
             <div className="flex items-center gap-4">
               {currentUser ? (
                 <>
-                  <span className="font-semibold text-[#b36b3c] bg-[#f7e2cf] px-3 py-1.5 rounded-full text-sm">
-                    {currentUser.email.split('@')[0]}
-                  </span>
-                  <button
-                    onClick={logout}
-                    className="border-2 border-[#d48c54] px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-[#d48c54] hover:text-white transition-all"
-                  >
-                    Выйти
-                  </button>
+                  <span className="font-semibold text-[#b36b3c] bg-[#f7e2cf] px-3 py-1.5 rounded-full text-sm">{currentUser.email.split('@')[0]}</span>
+                  <button onClick={logout} className="border-2 border-[#d48c54] px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-[#d48c54] hover:text-white transition-all">Выйти</button>
                 </>
               ) : (
-                <button
-                  onClick={() => { setShowAuthModal(true); setIsLoginMode(true); }}
-                  className="border-2 border-[#d48c54] px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-[#d48c54] hover:text-white transition-all"
-                >
-                  Вход
-                </button>
+                <button onClick={() => { setShowAuthModal(true); setIsLoginMode(true); }} className="border-2 border-[#d48c54] px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-[#d48c54] hover:text-white transition-all">Вход</button>
               )}
               <button onClick={() => setShowCartModal(true)} className="relative text-[#5a3a2e] hover:text-[#d48c54] transition-colors">
                 <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
                 </svg>
                 {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-3 bg-[#d48c54] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartCount}
-                  </span>
+                  <span className="absolute -top-2 -right-3 bg-[#d48c54] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>
                 )}
               </button>
             </div>
@@ -288,23 +230,18 @@ export default function App() {
               <div className="flex-1 min-w-[300px]">
                 <h1 className="text-5xl font-bold text-[#5a3a2e] mb-4 leading-tight">Сладость, которую хочется дарить</h1>
                 <p className="text-xl mb-7 text-[#6b4c3b]">Торты, капкейки, печенье ручной работы из натуральных ингредиентов. Создаём праздник с любовью!</p>
-                <button
-                  onClick={() => setCurrentSection('catalog')}
-                  className="bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white px-6 py-3 rounded-full font-bold hover:scale-95 transition-transform shadow-md"
-                >
+                <button onClick={() => setCurrentSection('catalog')} className="bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white px-6 py-3 rounded-full font-bold hover:scale-95 transition-transform shadow-md">
                   Смотреть каталог
                 </button>
               </div>
-              <div>
-                <img src={si('#fff4ea','#d48c54',500,400)} className="rounded-[32px] max-w-full shadow-lg" alt="красивый торт" />
-              </div>
+              <div className="w-[300px] h-[300px] rounded-[32px] shadow-lg flex-shrink-0" style={{background: gr('#fff4ea','#d48c54')}} />
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
-              <img src={si('#fff4ea','#f5c98e',400,192)} className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="торт с фруктами" />
-              <img src={si('#ffe4ef','#f5a7c0',400,192)} className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="капкейк" />
-              <img src={si('#f3e5f5','#ce93d8',400,192)} className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="макароны" />
-              <img src={si('#fbe9e7','#d4a882',400,192)} className="rounded-2xl w-full h-48 object-cover shadow-md hover:scale-105 transition-transform" alt="декоративный торт" />
+              <div className="rounded-2xl w-full h-48 shadow-md hover:scale-105 transition-transform" style={{background: gr('#fff4ea','#f5c98e')}} />
+              <div className="rounded-2xl w-full h-48 shadow-md hover:scale-105 transition-transform" style={{background: gr('#ffe4ef','#f5a7c0')}} />
+              <div className="rounded-2xl w-full h-48 shadow-md hover:scale-105 transition-transform" style={{background: gr('#f3e5f5','#ce93d8')}} />
+              <div className="rounded-2xl w-full h-48 shadow-md hover:scale-105 transition-transform" style={{background: gr('#fbe9e7','#d4a882')}} />
             </div>
 
             <div className="text-center my-5">
@@ -328,10 +265,7 @@ export default function App() {
                   { icon: '🚚', title: 'Доставка свежести', text: 'Собственная курьерская служба или самовывоз в день приготовления.' },
                   { icon: '💖', title: 'Любовь к клиентам', text: 'Индивидуальные скидки именинникам, подарки и персональные предложения.' },
                 ].map((adv, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-white/90 backdrop-blur-sm p-8 rounded-[2rem] transition-all hover:-translate-y-2 hover:shadow-xl border border-[rgba(212,140,84,0.2)] hover:border-[#d48c54] hover:bg-white"
-                  >
+                  <div key={idx} className="bg-white/90 backdrop-blur-sm p-8 rounded-[2rem] transition-all hover:-translate-y-2 hover:shadow-xl border border-[rgba(212,140,84,0.2)] hover:border-[#d48c54] hover:bg-white">
                     <div className="text-5xl mb-5">{adv.icon}</div>
                     <h3 className="text-2xl font-bold mb-3 text-[#5a3a2e]">{adv.title}</h3>
                     <p className="text-[#6f5342] leading-relaxed">{adv.text}</p>
@@ -347,19 +281,13 @@ export default function App() {
             <h2 className="text-4xl font-bold text-center my-8 text-[#5a3a2e]">Наши десерты</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 my-10">
               {products.map(product => (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-[2rem] p-5 transition-all hover:-translate-y-1.5 hover:shadow-xl border border-[#f5e4d8]"
-                >
-                  <img src={product.img} alt={product.name} className="w-full h-52 object-cover rounded-[1.5rem] bg-[#f7e6da] mb-3" />
+                <div key={product.id} className="bg-white rounded-[2rem] p-5 transition-all hover:-translate-y-1.5 hover:shadow-xl border border-[#f5e4d8]">
+                  <div className="w-full h-52 rounded-[1.5rem] mb-3" style={{background: product.img}} />
                   <div className="text-xl font-semibold my-2.5">{product.name}</div>
                   <div className="text-[#6b4c3b] text-sm">{product.desc}</div>
                   <div className="text-xs text-[#8a6a58] mt-1">{product.weight}</div>
                   <div className="text-2xl font-bold text-[#d48c54] my-3">{product.price} ₽</div>
-                  <button
-                    onClick={() => addToCart(product)}
-                    className="bg-[#5a3a2e] text-white w-full py-3 rounded-full font-bold hover:bg-[#b36b3c] transition-colors"
-                  >
+                  <button onClick={() => addToCart(product)} className="bg-[#5a3a2e] text-white w-full py-3 rounded-full font-bold hover:bg-[#b36b3c] transition-colors">
                     Заказать
                   </button>
                 </div>
@@ -376,33 +304,30 @@ export default function App() {
                   <h2 className="text-3xl font-bold mb-4 text-[#5a3a2e]">О нашей кондитерской</h2>
                   <p className="mb-4 text-lg leading-relaxed"><strong>«Сладкий Рай»</strong> — семейная кондитерская, где мы создаём десерты с душой. Используем только натуральные масла, свежие яйца, премиальный шоколад.</p>
                   <p className="mb-6 text-lg leading-relaxed">Шеф-кондитер с международными стажировками. Каждый торт — произведение искусства. Индивидуальный заказ — наша специалитетность: от веганских десертов до безглютеновых шедевров.</p>
-                  <button
-                    onClick={() => setCurrentSection('catalog')}
-                    className="bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white px-6 py-3 rounded-full font-bold hover:scale-95 transition-transform"
-                  >
+                  <button onClick={() => setCurrentSection('catalog')} className="bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white px-6 py-3 rounded-full font-bold hover:scale-95 transition-transform">
                     Заказать десерт
                   </button>
                 </div>
                 <div className="flex-1 text-center">
-                  <img src={si('#fff9f2','#e8b888',500,400)} className="rounded-[28px] w-full max-w-[400px] mx-auto shadow-md" alt="витрина кондитерской" />
+                  <div className="rounded-[28px] w-full max-w-[400px] h-64 mx-auto shadow-md" style={{background: gr('#fff9f2','#e8b888')}} />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                <div className="relative rounded-2xl overflow-hidden shadow-lg group">
-                  <img src={si('#fff4ea','#d48c54',500,256)} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="процесс приготовления" />
+                <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                  <div className="w-full h-64" style={{background: gr('#fff4ea','#d48c54')}} />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h3 className="text-white font-bold text-lg">Процесс с любовью</h3>
                   </div>
                 </div>
-                <div className="relative rounded-2xl overflow-hidden shadow-lg group">
-                  <img src={si('#fbe9e7','#d4a882',500,256)} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="свежая выпечка" />
+                <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                  <div className="w-full h-64" style={{background: gr('#fbe9e7','#d4a882')}} />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h3 className="text-white font-bold text-lg">Свежая выпечка</h3>
                   </div>
                 </div>
-                <div className="relative rounded-2xl overflow-hidden shadow-lg group">
-                  <img src={si('#fff4ea','#f5c98e',500,256)} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" alt="декорирование" />
+                <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                  <div className="w-full h-64" style={{background: gr('#fff4ea','#f5c98e')}} />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h3 className="text-white font-bold text-lg">Ручное декорирование</h3>
                   </div>
@@ -419,76 +344,26 @@ export default function App() {
               <div className="grid md:grid-cols-2 gap-12">
                 <div className="bg-gradient-to-br from-[#fff9f2] to-[#ffe9db] rounded-[2rem] p-8 space-y-6">
                   <h3 className="text-2xl font-bold text-[#5a3a2e] mb-6">Контактная информация</h3>
-                  <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">📍</div>
-                    <div>
-                      <div className="font-semibold text-lg">Адрес</div>
-                      <div className="text-[#6b4c3b]">г. Ленинградская, ул. Сладкая, 15</div>
+                  {[
+                    { icon: '📍', label: 'Адрес', value: 'г. Ленинградская, ул. Сладкая, 15' },
+                    { icon: '📞', label: 'Телефон', value: '+7 (999) 123-45-67' },
+                    { icon: '✉️', label: 'Email', value: 'sweet@cakes.ru' },
+                    { icon: '📸', label: 'Instagram', value: '@sweet_ray_cakes' },
+                    { icon: '⏰', label: 'Время работы', value: 'Пн-Вс: 9:00 - 21:00' },
+                  ].map((c, i) => (
+                    <div key={i} className="flex items-start gap-4">
+                      <div className="text-[#d48c54] text-2xl mt-1">{c.icon}</div>
+                      <div><div className="font-semibold text-lg">{c.label}</div><div className="text-[#6b4c3b]">{c.value}</div></div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">📞</div>
-                    <div>
-                      <div className="font-semibold text-lg">Телефон</div>
-                      <div className="text-[#6b4c3b]">+7 (999) 123-45-67</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">✉️</div>
-                    <div>
-                      <div className="font-semibold text-lg">Email</div>
-                      <div className="text-[#6b4c3b]">sweet@cakes.ru</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">📸</div>
-                    <div>
-                      <div className="font-semibold text-lg">Instagram</div>
-                      <div className="text-[#6b4c3b]">@sweet_ray_cakes</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="text-[#d48c54] text-2xl mt-1">⏰</div>
-                    <div>
-                      <div className="font-semibold text-lg">Время работы</div>
-                      <div className="text-[#6b4c3b]">Пн-Вс: 9:00 - 21:00</div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-
                 <div className="bg-gradient-to-br from-[#f7e2cf] to-white rounded-[2rem] p-8">
                   <h3 className="text-2xl font-bold text-[#5a3a2e] mb-6">Напишите нам</h3>
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      alert('Сообщение отправлено! Менеджер свяжется с вами.');
-                      e.currentTarget.reset();
-                    }}
-                    className="space-y-4"
-                  >
-                    <input
-                      type="text"
-                      placeholder="Ваше имя"
-                      required
-                      className="w-full px-5 py-3 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]"
-                    />
-                    <input
-                      type="tel"
-                      placeholder="Телефон"
-                      required
-                      className="w-full px-5 py-3 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]"
-                    />
-                    <textarea
-                      rows={4}
-                      placeholder="Ваш вопрос или заказ"
-                      className="w-full px-5 py-3 border border-[#e2cfbf] rounded-3xl bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54] resize-none"
-                    />
-                    <button
-                      type="submit"
-                      className="w-full bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white py-3 rounded-full font-bold hover:scale-98 transition-transform shadow-md"
-                    >
-                      Отправить
-                    </button>
+                  <form onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено! Менеджер свяжется с вами.'); e.currentTarget.reset(); }} className="space-y-4">
+                    <input type="text" placeholder="Ваше имя" required className="w-full px-5 py-3 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]" />
+                    <input type="tel" placeholder="Телефон" required className="w-full px-5 py-3 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]" />
+                    <textarea rows={4} placeholder="Ваш вопрос или заказ" className="w-full px-5 py-3 border border-[#e2cfbf] rounded-3xl bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54] resize-none" />
+                    <button type="submit" className="w-full bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white py-3 rounded-full font-bold hover:scale-98 transition-transform shadow-md">Отправить</button>
                   </form>
                 </div>
               </div>
@@ -500,8 +375,7 @@ export default function App() {
           <section>
             <div className="bg-[#fff6ed] rounded-[2rem] p-12 my-12">
               <h2 className="text-3xl font-bold mb-4 text-[#5a3a2e] flex items-center gap-3">
-                <span className="text-4xl">👤</span>
-                Личный кабинет
+                <span className="text-4xl">👤</span> Личный кабинет
               </h2>
               <p className="text-lg mb-6"><strong>{currentUser?.email}</strong></p>
               <div className="bg-[#fff9f3] p-6 rounded-[28px]">
@@ -515,13 +389,9 @@ export default function App() {
                         <div className="font-bold text-lg">Заказ #{order.id}</div>
                         <div className="text-sm text-[#8a6a58] mb-2">{order.date}</div>
                         {order.items.map((item, idx) => (
-                          <div key={idx} className="text-sm text-[#6b4c3b]">
-                            {item.name} x{item.quantity} — {item.price * item.quantity}₽
-                          </div>
+                          <div key={idx} className="text-sm text-[#6b4c3b]">{item.name} x{item.quantity} — {item.price * item.quantity}₽</div>
                         ))}
-                        <div className="mt-2 font-semibold text-[#d48c54]">
-                          Итого: {order.total}₽ | Статус: {order.status}
-                        </div>
+                        <div className="mt-2 font-semibold text-[#d48c54]">Итого: {order.total}₽ | Статус: {order.status}</div>
                       </li>
                     ))}
                   </ul>
@@ -553,9 +423,7 @@ export default function App() {
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="font-bold text-[#d48c54]">{item.price * item.quantity}₽</span>
-                        <button onClick={() => removeFromCart(idx)} className="text-xl hover:scale-110 transition-transform">
-                          🗑️
-                        </button>
+                        <button onClick={() => removeFromCart(idx)} className="text-xl hover:scale-110 transition-transform">🗑️</button>
                       </div>
                     </div>
                   ))}
@@ -563,18 +431,8 @@ export default function App() {
                 <div className="font-bold text-xl mb-6 text-center text-[#5a3a2e]">Итого: {cartTotal} ₽</div>
               </>
             )}
-            <button
-              onClick={checkout}
-              className="w-full bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white py-3 rounded-full font-bold hover:scale-98 transition-transform mb-3"
-            >
-              Оформить заказ
-            </button>
-            <button
-              onClick={() => setShowCartModal(false)}
-              className="w-full text-[#d48c54] py-2 font-semibold hover:underline"
-            >
-              Закрыть
-            </button>
+            <button onClick={checkout} className="w-full bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white py-3 rounded-full font-bold hover:scale-98 transition-transform mb-3">Оформить заказ</button>
+            <button onClick={() => setShowCartModal(false)} className="w-full text-[#d48c54] py-2 font-semibold hover:underline">Закрыть</button>
           </div>
         </div>
       )}
@@ -583,24 +441,9 @@ export default function App() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] p-4" onClick={() => setShowAuthModal(false)}>
           <div className="bg-white w-full max-w-[450px] rounded-[40px] p-8 shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-2xl font-bold mb-6 text-[#5a3a2e]">{isLoginMode ? 'Вход' : 'Регистрация'}</h3>
-            <input
-              type="text"
-              placeholder="Email"
-              value={authEmail}
-              onChange={(e) => setAuthEmail(e.target.value)}
-              className="w-full px-5 py-3 mb-4 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]"
-            />
-            <input
-              type="password"
-              placeholder="Пароль"
-              value={authPassword}
-              onChange={(e) => setAuthPassword(e.target.value)}
-              className="w-full px-5 py-3 mb-6 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]"
-            />
-            <button
-              onClick={handleAuth}
-              className="w-full bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white py-3 rounded-full font-bold hover:scale-98 transition-transform mb-4"
-            >
+            <input type="text" placeholder="Email" value={authEmail} onChange={(e) => setAuthEmail(e.target.value)} className="w-full px-5 py-3 mb-4 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]" />
+            <input type="password" placeholder="Пароль" value={authPassword} onChange={(e) => setAuthPassword(e.target.value)} className="w-full px-5 py-3 mb-6 border border-[#e2cfbf] rounded-full bg-[#fffdfb] focus:outline-none focus:ring-2 focus:ring-[#d48c54]" />
+            <button onClick={handleAuth} className="w-full bg-gradient-to-r from-[#d48c54] to-[#b36b3c] text-white py-3 rounded-full font-bold hover:scale-98 transition-transform mb-4">
               {isLoginMode ? 'Войти' : 'Создать аккаунт'}
             </button>
             <div className="text-center text-sm mb-4">
@@ -609,12 +452,7 @@ export default function App() {
                 {isLoginMode ? 'Зарегистрироваться' : 'Войти'}
               </span>
             </div>
-            <button
-              onClick={() => setShowAuthModal(false)}
-              className="w-full text-[#8a6a58] py-2 font-semibold hover:underline"
-            >
-              Отмена
-            </button>
+            <button onClick={() => setShowAuthModal(false)} className="w-full text-[#8a6a58] py-2 font-semibold hover:underline">Отмена</button>
           </div>
         </div>
       )}
