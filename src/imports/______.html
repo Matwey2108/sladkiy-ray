@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Сладкий рай | Кондитерская handmade</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background-color: #fffaf5;
+            color: #3e2a2a;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --caramel: #d48c54;
+            --caramel-dark: #b36b3c;
+            --caramel-light: #f7e2cf;
+            --chocolate: #5a3a2e;
+            --cream: #fff2e6;
+            --shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(212, 140, 84, 0.15);
+            backdrop-filter: blur(2px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--caramel), var(--chocolate));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: var(--chocolate);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #4b2e24;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+            padding: 6px 0;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--caramel);
+            border-bottom: 2px solid var(--caramel);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.6rem;
+            color: var(--chocolate);
+            transition: 0.2s;
+        }
+        .cart-icon:hover { color: var(--caramel); }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: var(--caramel);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-name {
+            font-weight: 600;
+            color: var(--caramel-dark);
+            background: var(--caramel-light);
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+        .logout-btn, .login-link {
+            background: none;
+            border: 1.5px solid var(--caramel);
+            padding: 6px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .logout-btn:hover, .login-link:hover {
+            background: var(--caramel);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Модалки */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 450px;
+            border-radius: 40px;
+            padding: 32px 28px;
+            box-shadow: var(--shadow);
+        }
+        .modal-content input, .modal-content textarea {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 18px;
+            border: 1px solid #e2cfbf;
+            border-radius: 50px;
+            font-family: inherit;
+            background: #fffdfb;
+        }
+        .btn {
+            background: linear-gradient(95deg, var(--caramel), var(--caramel-dark));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            transform: scale(0.98);
+            box-shadow: 0 5px 12px rgba(211, 140, 84, 0.3);
+        }
+        .switch-auth {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 0.9rem;
+        }
+        .switch-auth span {
+            color: var(--caramel);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(115deg, #fff4ea 0%, #ffe9db 100%);
+            border-radius: 2.5rem;
+            padding: 48px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            margin: 32px 0;
+            box-shadow: var(--shadow-sm);
+        }
+        .hero-content h1 {
+            font-size: 3rem;
+            color: var(--chocolate);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 28px;
+            color: #6b4c3b;
+        }
+
+        /* БЛОК ПРЕИМУЩЕСТВ — КРАСИВЫЙ ДИЗАЙН */
+        .advantages-hero {
+            background: linear-gradient(145deg, #ffffff, #fff9f2);
+            border-radius: 3rem;
+            padding: 60px 32px;
+            margin: 48px 0;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .advantages-hero::before {
+            content: "✨";
+            font-size: 200px;
+            position: absolute;
+            bottom: -40px;
+            right: -40px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        .advantages-hero h2 {
+            font-size: 2.5rem;
+            color: var(--chocolate);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .advantages-sub {
+            color: #8a6a58;
+            max-width: 600px;
+            margin: 0 auto 48px auto;
+            font-size: 1.15rem;
+        }
+        .adv-grid-modern {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .adv-card-modern {
+            flex: 1;
+            min-width: 240px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(2px);
+            padding: 32px 20px;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 140, 84, 0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+        }
+        .adv-card-modern:hover {
+            transform: translateY(-8px);
+            border-color: var(--caramel);
+            box-shadow: 0 25px 35px -12px rgba(212, 140, 84, 0.25);
+            background: white;
+        }
+        .adv-card-modern i {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--caramel), #e7a56e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .adv-card-modern h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--chocolate);
+        }
+        .adv-card-modern p {
+            color: #6f5342;
+            line-height: 1.4;
+        }
+
+        /* Каталог */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 40px 0;
+        }
+        .product-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 20px;
+            transition: 0.25s;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #f5e4d8;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+        .product-img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 1.5rem;
+            background: #f7e6da;
+        }
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--caramel);
+            margin: 12px 0;
+        }
+        .order-btn {
+            background: var(--chocolate);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .order-btn:hover { background: var(--caramel-dark); }
+
+        .about-section, .contact-section {
+            background: #fef5ec;
+            border-radius: 2rem;
+            padding: 48px 32px;
+            margin: 48px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        .contact-section {
+            background: white;
+            box-shadow: var(--shadow-sm);
+        }
+        footer {
+            background: #2d1f19;
+            color: #e2cfbf;
+            text-align: center;
+            padding: 32px;
+            border-radius: 2rem 2rem 0 0;
+            margin-top: 48px;
+        }
+        .order-history {
+            background: #fff9f3;
+            padding: 24px;
+            border-radius: 28px;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2rem; }
+            .advantages-hero h2 { font-size: 1.8rem; }
+            .navbar { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">Сладкий<span>Рай</span></div>
+            <ul class="nav-links">
+                <li><a data-nav="home">Главная</a></li>
+                <li><a data-nav="catalog">Каталог</a></li>
+                <li><a data-nav="advantages">Преимущества</a></li>
+                <li><a data-nav="about">О нас</a></li>
+                <li><a data-nav="contacts">Контакты</a></li>
+                <li><a data-nav="profile" id="profileNavLink" style="display: none;">Мои заказы</a></li>
+            </ul>
+            <div class="user-area">
+                <span id="userDisplay" class="user-name"></span>
+                <button id="authBtn" class="login-link">Вход</button>
+                <button id="logoutBtn" class="logout-btn" style="display: none;">Выйти</button>
+                <div class="cart-icon" id="cartBtn">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <!-- ГЛАВНАЯ СЕКЦИЯ -->
+        <section id="homeSection">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Сладость, которую хочется дарить</h1>
+                    <p>Торты, капкейки, печенье ручной работы из натуральных ингредиентов. Создаём праздник с любовью!</p>
+                    <button class="btn" id="exploreBtn" style="width: auto; display: inline-block;">Смотреть каталог</button>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9582?w=400" style="border-radius: 32px; max-width: 100%; box-shadow: var(--shadow);" alt="торт">
+                </div>
+            </div>
+            <!-- Краткий анонс преимуществ (для главной страницы, но сам блок будет отдельно) -->
+            <div style="text-align: center; margin: 20px 0 10px;">
+                <p style="color: var(--caramel-dark); font-weight: 500;">⭐ Узнайте, почему нас выбирают — перейдите в раздел «Преимущества»</p>
+            </div>
+        </section>
+
+        <!-- ОТДЕЛЬНЫЙ БЛОК ПРЕИМУЩЕСТВ (красивый, полный) -->
+        <section id="advantagesSection" style="display: none;">
+            <div class="advantages-hero">
+                <h2>✨ Идеальные десерты начинаются здесь</h2>
+                <div class="advantages-sub">Почему «Сладкий Рай» — выбор ценителей handmade-сладостей</div>
+                <div class="adv-grid-modern">
+                    <div class="adv-card-modern">
+                        <i class="fas fa-seedling"></i>
+                        <h3>100% Натурально</h3>
+                        <p>Масло высшего сорта, фермерские яйца, бельгийский шоколад. Никаких заменителей.</p>
+                    </div>
+                    <div class="adv-card-modern">
+                        <i class="fas fa-hand-sparkles"></i>
+                        <h3>Ручная работа</h3>
+                        <p>Каждый торт и капкейк создаются вручную с трепетом и вниманием к деталям.</p>
+                    </div>
+                    <div class="adv-card-modern">
+                        <i class="fas fa-crown"></i>
+                        <h3>Авторский подход</h3>
+                        <p>Эксклюзивные рецепты и дизайн под ваш праздник. Мы воплотим любую идею.</p>
+                    </div>
+                    <div class="adv-card-modern">
+                        <i class="fas fa-calendar-check"></i>
+                        <h3>Срочность 24ч</h3>
+                        <p>Сладкий сюрприз даже если остался всего день. Оперативно и свежо.</p>
+                    </div>
+                    <div class="adv-card-modern">
+                        <i class="fas fa-truck-fast"></i>
+                        <h3>Доставка свежести</h3>
+                        <p>Собственная курьерская служба или самовывоз в день приготовления.</p>
+                    </div>
+                    <div class="adv-card-modern">
+                        <i class="fas fa-heart"></i>
+                        <h3>Любовь к клиентам</h3>
+                        <p>Индивидуальные скидки именинникам, подарки и персональные предложения.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- КАТАЛОГ -->
+        <section id="catalogSection" style="display:none">
+            <h2 class="section-title" style="text-align:center; font-size:2rem; margin: 20px 0;">Наши десерты</h2>
+            <div id="productsGrid" class="products-grid"></div>
+        </section>
+
+        <!-- О НАС -->
+        <section id="aboutSection" style="display:none">
+            <div class="about-section">
+                <div style="flex:1">
+                    <h2>О нашей кондитерской</h2>
+                    <p><strong>«Сладкий Рай»</strong> — семейная кондитерская, где мы создаём десерты с душой. Используем только натуральные масла, свежие яйца, премиальный шоколад.</p>
+                    <p>Шеф-кондитер с международными стажировками. Каждый торт — произведение искусства. Индивидуальный заказ — наша специалитетность: от веганских десертов до безглютеновых шедевров.</p>
+                    <button class="btn" id="toCatalogBtn" style="width:auto; margin-top:16px;">Заказать десерт</button>
+                </div>
+                <div style="flex:1; text-align:center">
+                    <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=400" style="border-radius:28px; width:100%; max-width:300px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- КОНТАКТЫ -->
+        <section id="contactsSection" style="display:none">
+            <div class="contact-section">
+                <div style="flex:1">
+                    <h3>Контактная информация</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Ленинградская, ул. Сладкая, 15</p>
+                    <p><i class="fas fa-phone-alt"></i> +7 (999) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> sweet@cakes.ru</p>
+                    <p><i class="fab fa-instagram"></i> @sweet_ray_cakes</p>
+                </div>
+                <div style="flex:1">
+                    <h3>Напишите нам</h3>
+                    <form id="feedbackForm">
+                        <input type="text" id="fbName" placeholder="Ваше имя" required>
+                        <input type="tel" id="fbPhone" placeholder="Телефон" required>
+                        <textarea rows="3" placeholder="Ваш вопрос или заказ" id="fbMessage"></textarea>
+                        <button type="submit" class="btn">Отправить</button>
+                        <p id="formStatus" style="margin-top:10px"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ПРОФИЛЬ -->
+        <section id="profileSection" style="display:none">
+            <div class="about-section" style="background:#fff6ed">
+                <div style="width:100%">
+                    <h2><i class="fas fa-user-circle"></i> Личный кабинет</h2>
+                    <p id="profileEmail"></p>
+                    <div class="order-history">
+                        <h3>История заказов</h3>
+                        <div id="ordersHistoryList">Загрузка...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Модалки -->
+<div id="cartModal" class="modal"><div class="modal-content"><h3>Ваша корзина</h3><div id="cartItemsList"></div><div id="cartTotal" style="font-weight:bold; margin:15px 0;"></div><button class="btn" id="checkoutBtn">Оформить заказ</button><button id="closeModalBtn" style="margin-top:12px; background:none; border:none; color:var(--caramel); cursor:pointer">Закрыть</button></div></div>
+<div id="authModal" class="modal"><div class="modal-content"><h3 id="authTitle">Вход</h3><input type="text" id="authEmail" placeholder="Email"><input type="password" id="authPassword" placeholder="Пароль"><button id="submitAuthBtn" class="btn">Войти</button><div class="switch-auth">Нет аккаунта? <span id="switchToReg">Зарегистрироваться</span></div><button id="closeAuthModal" style="margin-top:12px; background:none; border:none;">Отмена</button></div></div>
+
+<footer><p>© 2025 Кондитерская «Сладкий Рай» — Торты и десерты на заказ. С любовью к сладкому.</p></footer>
+
+<script>
+    // ТОВАРЫ
+    const products = [
+        { id: 1, name: "Медовик нежный", desc: "Классический многослойный торт", weight: "900 г", price: 1350, img: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=300&auto=format" },
+        { id: 2, name: "Чизкейк Нью-Йорк", desc: "Кремовая текстура", weight: "1000 г", price: 1600, img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=300&auto=format" },
+        { id: 3, name: "Капкейк Солёная карамель", desc: "Нежный бисквит", weight: "110 г", price: 220, img: "https://images.unsplash.com/photo-1603532648955-039310d9a75b?w=300&auto=format" },
+        { id: 4, name: "Печенье с шоколадом", desc: "Хрустящее, с кусочками шоколада", weight: "250 г", price: 390, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=300&auto=format" },
+        { id: 5, name: "Макарунс ассорти", desc: "6 шт, французские", weight: "150 г", price: 540, img: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=300&auto=format" },
+        { id: 6, name: "Эклер с заварным кремом", desc: "4 шт, воздушное тесто", weight: "200 г", price: 450, img: "https://images.unsplash.com/photo-1601381718415-a05b6c1b9c6b?w=300&auto=format" }
+    ];
+
+    let currentUser = null;
+    function loadUsers() { if(!localStorage.getItem('users')) localStorage.setItem('users', JSON.stringify([])); }
+    function getUsers() { return JSON.parse(localStorage.getItem('users') || '[]'); }
+    function saveUsers(users) { localStorage.setItem('users', JSON.stringify(users)); }
+    function registerUser(email, password) {
+        let users = getUsers();
+        if(users.find(u => u.email === email)) return false;
+        users.push({ email, password, orders: [] });
+        saveUsers(users);
+        return true;
+    }
+    function loginUser(email, password) {
+        let users = getUsers();
+        let user = users.find(u => u.email === email && u.password === password);
+        if(user) { currentUser = { email: user.email, orders: user.orders || [] }; localStorage.setItem('currentUser', JSON.stringify(currentUser)); return true; }
+        return false;
+    }
+    function logout() { currentUser = null; localStorage.removeItem('currentUser'); updateAuthUI(); }
+    function getCurrentUser() { if(currentUser) return currentUser; let saved = localStorage.getItem('currentUser'); if(saved) { currentUser = JSON.parse(saved); return currentUser; } return null; }
+    function addOrderToUser(orderData) {
+        if(!currentUser) return false;
+        let users = getUsers();
+        let idx = users.findIndex(u => u.email === currentUser.email);
+        if(idx !== -1) { let newOrder = { id: Date.now(), date: new Date().toLocaleString(), items: orderData.items, total: orderData.total, status: 'Принят' }; users[idx].orders.push(newOrder); saveUsers(users); currentUser.orders = users[idx].orders; localStorage.setItem('currentUser', JSON.stringify(currentUser)); return true; }
+        return false;
+    }
+
+    let cart = JSON.parse(localStorage.getItem("sweetCart")) || [];
+    function updateCartUI() { const count = cart.reduce((s,i)=> s + i.quantity, 0); document.getElementById("cartCount").innerText = count; localStorage.setItem("sweetCart", JSON.stringify(cart)); renderCartModal(); }
+    function renderCartModal() { const container = document.getElementById("cartItemsList"); if(!container) return; if(cart.length===0){ container.innerHTML="<p>Корзина пуста</p>"; document.getElementById("cartTotal").innerHTML="Итого: 0 ₽"; return; } let html="", total=0; cart.forEach((item,idx)=>{ let sub = item.price * item.quantity; total += sub; html += `<div style="display:flex; justify-content:space-between; margin-bottom:12px;"><div><strong>${item.name}</strong> x${item.quantity}</div><div>${sub}₽ <button class="remove-item" data-idx="${idx}" style="background:none; border:none; color:#b36b3c;">🗑️</button></div></div>`; }); container.innerHTML = html; document.getElementById("cartTotal").innerHTML = `Итого: ${total} ₽`; document.querySelectorAll(".remove-item").forEach(btn=> btn.addEventListener("click",()=>{ let idx = parseInt(btn.dataset.idx); cart.splice(idx,1); updateCartUI(); })); }
+    function addToCart(product) { if(!getCurrentUser()) { alert("Добавление товаров доступно только после входа!"); openAuthModal(true); return false; } let exist = cart.find(i=> i.id === product.id); if(exist) exist.quantity++; else cart.push({...product, quantity:1}); updateCartUI(); alert(`${product.name} добавлен в корзину`); return true; }
+
+    function renderProducts() { const grid = document.getElementById("productsGrid"); if(!grid) return; grid.innerHTML = ""; products.forEach(p => { const card = document.createElement("div"); card.className = "product-card"; card.innerHTML = `<img class="product-img" src="${p.img}"><div style="font-size:1.3rem; font-weight:600; margin:10px 0 4px;">${p.name}</div><div style="color:#6b4c3b;">${p.desc}</div><div style="font-size:0.85rem;">${p.weight}</div><div class="product-price">${p.price} ₽</div><button class="order-btn" data-id="${p.id}">Заказать</button>`; grid.appendChild(card); }); document.querySelectorAll(".order-btn").forEach(btn => btn.addEventListener("click", (e) => { const id = parseInt(btn.dataset.id); const product = products.find(p => p.id === id); if(product) addToCart(product); })); }
+
+    function updateAuthUI() { let user = getCurrentUser(); const userSpan = document.getElementById("userDisplay"); const authBtn = document.getElementById("authBtn"); const logoutBtn = document.getElementById("logoutBtn"); const profileLink = document.getElementById("profileNavLink"); if(user) { userSpan.innerText = user.email.split('@')[0]; authBtn.style.display = "none"; logoutBtn.style.display = "inline-block"; profileLink.style.display = "inline-block"; } else { userSpan.innerText = ""; authBtn.style.display = "inline-block"; logoutBtn.style.display = "none"; profileLink.style.display = "none"; } }
+    function showProfileOrders() { let user = getCurrentUser(); if(!user) return; document.getElementById("profileEmail").innerHTML = `<strong>${user.email}</strong>`; let ordersDiv = document.getElementById("ordersHistoryList"); if(!user.orders || user.orders.length === 0) { ordersDiv.innerHTML = "<p>У вас пока нет заказов. Авторизуйтесь и добавьте товары!</p>"; return; } let html = "<ul style='list-style:none; padding-left:0'>"; user.orders.slice().reverse().forEach(order => { html += `<li style="background:white; margin-bottom:12px; padding:12px; border-radius:20px;"><strong>Заказ #${order.id}</strong> (${order.date})<br>`; order.items.forEach(it => { html += `${it.name} x${it.quantity} — ${it.price * it.quantity}₽<br>`; }); html += `Итого: ${order.total}₽ | Статус: ${order.status}</li>`; }); html += "</ul>"; ordersDiv.innerHTML = html; }
+
+    document.getElementById("checkoutBtn")?.addEventListener("click", () => { if(cart.length === 0) { alert("Корзина пуста"); return; } if(!getCurrentUser()) { alert("Войдите в аккаунт для оформления"); openAuthModal(true); return; } let total = cart.reduce((sum,i)=> sum + i.price * i.quantity, 0); let orderItems = cart.map(i => ({ name: i.name, quantity: i.quantity, price: i.price })); addOrderToUser({ items: orderItems, total: total }); cart = []; updateCartUI(); alert("Заказ оформлен! Спасибо. История в личном кабинете."); document.getElementById("cartModal").style.display = "none"; if(document.getElementById("profileSection").style.display === "block") showProfileOrders(); });
+
+    const authModal = document.getElementById("authModal"); let isLoginMode = true;
+    function openAuthModal(login=true) { isLoginMode = login; document.getElementById("authTitle").innerText = login ? "Вход" : "Регистрация"; document.getElementById("submitAuthBtn").innerText = login ? "Войти" : "Создать аккаунт"; document.getElementById("switchToReg").innerText = login ? "Зарегистрироваться" : "Уже есть аккаунт? Войти"; authModal.style.display = "flex"; }
+    document.getElementById("authBtn").onclick = () => openAuthModal(true);
+    document.getElementById("switchToReg").onclick = () => openAuthModal(!isLoginMode);
+    document.getElementById("closeAuthModal").onclick = () => authModal.style.display = "none";
+    document.getElementById("submitAuthBtn").onclick = () => { let email = document.getElementById("authEmail").value.trim(); let pass = document.getElementById("authPassword").value.trim(); if(!email || !pass) { alert("Заполните поля"); return; } if(isLoginMode) { if(loginUser(email, pass)) { authModal.style.display = "none"; updateAuthUI(); alert("Добро пожаловать!"); document.getElementById("authEmail").value = ""; document.getElementById("authPassword").value = ""; } else alert("Неверный email или пароль"); } else { if(registerUser(email, pass)) { alert("Регистрация успешна! Войдите."); openAuthModal(true); } else alert("Email уже используется"); } };
+    document.getElementById("logoutBtn").onclick = () => { logout(); cart = []; updateCartUI(); alert("Вы вышли"); showSection("home"); };
+
+    const sectionsMap = { home:"homeSection", catalog:"catalogSection", advantages:"advantagesSection", about:"aboutSection", contacts:"contactsSection", profile:"profileSection" };
+    function showSection(name) { Object.values(sectionsMap).forEach(id => { let el = document.getElementById(id); if(el) el.style.display = "none"; }); let target = document.getElementById(sectionsMap[name]); if(target) target.style.display = "block"; if(name === "profile") { if(getCurrentUser()) showProfileOrders(); else { alert("Войдите в аккаунт"); showSection("home"); return; } } document.querySelectorAll(".nav-links a").forEach(link => { link.classList.remove("active"); if(link.getAttribute("data-nav") === name) link.classList.add("active"); }); }
+    document.querySelectorAll(".nav-links a").forEach(link => link.addEventListener("click", (e) => { let nav = link.getAttribute("data-nav"); if(nav === "profile" && !getCurrentUser()) { alert("Войдите, пожалуйста"); openAuthModal(true); return; } showSection(nav); }));
+    document.getElementById("exploreBtn")?.addEventListener("click", () => showSection("catalog"));
+    document.getElementById("toCatalogBtn")?.addEventListener("click", () => showSection("catalog"));
+
+    const cartModalElem = document.getElementById("cartModal");
+    document.getElementById("cartBtn").onclick = () => { cartModalElem.style.display = "flex"; renderCartModal(); };
+    document.getElementById("closeModalBtn").onclick = () => cartModalElem.style.display = "none";
+    window.onclick = (e) => { if(e.target === cartModalElem) cartModalElem.style.display = "none"; if(e.target === authModal) authModal.style.display = "none"; };
+    document.getElementById("feedbackForm")?.addEventListener("submit", (e) => { e.preventDefault(); alert("Сообщение отправлено! Менеджер свяжется с вами."); document.getElementById("feedbackForm").reset(); });
+
+    loadUsers(); let stored = getCurrentUser(); if(stored) currentUser = stored; updateAuthUI(); renderProducts(); updateCartUI(); showSection("home");
+</script>
+</body>
+</html>
